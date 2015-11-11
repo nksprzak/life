@@ -16,6 +16,11 @@ class AbstractCell
 {
 protected:
 	bool alive;
+	char status; //for Conway status is * or . fredkin its - or (int),+
+public:
+	virtual int num_alive(int x, int y)=0;
+	virtual int num_dead(int x, int y)=0;
+	//virtual void execute();
 };
 
 class Cell
@@ -29,13 +34,20 @@ public:
 
 class ConwayCell: public AbstractCell
 {
+public:
+	int num_alive(int x, int y);
+	int num_dead(int x, int y);
 
+	ConwayCell() {};
 };
 
 class FredkinCell: public AbstractCell
 {
 private:
 	int age;
+public:
+	int num_alive(int x, int y);
+	int num_dead(int x, int y);
 };
 
 
@@ -45,6 +57,29 @@ class Life
 
 private:
 	vector<vector<T> > grid;
+	int _x;
+	int _y;
+
+public:
+	void execute(int steps);
+	void printGrid();
+
+
+
+
+	Life<T>(int x, int y){
+		_x = x;
+		_y = y;
+		for(int i = 0; i < x; i++)
+		{
+			vector<T> a;
+			for(int j = 0; j < y; j++)
+			{
+				a = vector<T>(x);
+			}
+			grid.push_back(a);
+		}
+	};
 
 };
 
