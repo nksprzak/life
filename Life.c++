@@ -16,7 +16,11 @@ int ConwayCell::num_dead(int x, int y)
 {
 	return 0;
 }
-
+/*template <typename T>
+void Life<T>::parseFile(istream& r)
+	{
+		
+	}*/
 
 /*
 int main()

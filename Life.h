@@ -16,11 +16,12 @@ class AbstractCell
 {
 protected:
 	bool alive;
+	char status;
 	
 public:
-	char status; //for Conway status is * or . fredkin its - or (int),+
-	virtual int num_alive(int x, int y)=0;
-	virtual int num_dead(int x, int y)=0;
+	 //for Conway status is * or . fredkin its - or (int),+
+	/*virtual int num_alive(int x, int y)=0;
+	virtual int num_dead(int x, int y)=0;*/
 	//virtual void execute();
 };
 
@@ -36,10 +37,22 @@ public:
 class ConwayCell: public AbstractCell
 {
 public:
-	int num_alive(int x, int y);
-	int num_dead(int x, int y);
+	/*int num_alive(int x, int y);
+	int num_dead(int x, int y);*/
 
-	//ConwayCell() {};
+	ConwayCell() {
+		status = '*';
+	};
+
+	ConwayCell(char b) {
+		status = b;
+	};
+
+	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
+	{
+		os << sp.status;
+		return os;
+	}
 };
 
 class FredkinCell: public AbstractCell
@@ -47,10 +60,19 @@ class FredkinCell: public AbstractCell
 private:
 	int age;
 public:
-	int num_alive(int x, int y);
+	/*int num_alive(int x, int y);
 	int num_dead(int x, int y);
-
+	*/
 	FredkinCell() {};
+	FredkinCell(char s) {
+		status = s;
+		//age = a;
+	};
+	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
+	{
+		os << sp.status;
+		return os;
+	}
 };
 
 
@@ -60,24 +82,16 @@ class Life
 
 private:
 	vector<vector<T> > grid;
+
+	vector<T> cells;
 	int _x;
 	int _y;
 
 public:
 	void execute(int steps);
-	void printGrid()
+	void parseFile(istream& r)
 	{
-		for(int i = 0; i < this->_x; ++i)
-		{
-			for(int j = 0 ; j < this->_y; ++j)
-			{
-				cout << grid[i][j].status;
-			}
-			cout << endl;
-		}
-	}
-	void parse(istream& r)
-	{
+		//T f;
 		string s;
 		string::size_type sz;
 		getline(r,s);
@@ -105,18 +119,73 @@ public:
 			stringstream in(s);
 			while(in >> buf)
 			{
-				T f;
-				f.status = buf;
-				assert(rs!= rows || cs != cols);
+				T f(buf);
 				grid[rs][cs] = f;
 				cs++;
-				//cout << rs << " " << cs << endl;
 			}
 			cs = 0;
 			rs++;
 
 		}
 	}
+	int alive_neighs(int x, int y)
+	{
+		//replace x & y with the value youre looking at 
+		//were gunna check (x-1,y-1)(x,y-1),(x+1,y-1)
+		//				   (x -1, y)        (x+1,y)
+		//				   (x -1,y+1)(x,y+1)(x+1,y+1)
+		int count = 0;
+		int x_less = x -1 ; int y_less = y -1;
+		int x_more = x + 1; int y_more = y + 1;
+	/*	if(x_less >= 0 && y_less >= 0)
+		{
+			if(grid[x_less][y_less].status != '.' || grid[x_less][y_less].status != '-' ) count++;
+		}
+		if(x >= 0 && y_less >= 0)
+		{
+			if(grid[x][y_less].status != '.' || grid[x][y_less].status != '-' ) count++;
+		}
+		if(x_more <= _x && y_less >= 0)
+		{
+			if(grid[x_more][y_less].status != '.' || grid[x_more][y_less].status != '-' ) count++;
+		}
+		if(x_less >= 0 && y>=0)
+		{
+			if(grid[x_less][y].status != '.' || grid[x_less][y].status != '-' ) count++;
+		}
+		if(x_more <= _x && y >= 0 )
+		{
+			if(grid[x_more][y].status != '.' || grid[x_more][y].status != '-' ) count++;
+		}
+		if(x_less >= 0 && y_more <= _y)
+		{
+			if(grid[x_less][y_more].status != '.' || grid[x_less][y_more].status != '-' ) count++;
+		}
+		if(x >= 0 && y_more <= _y)
+		{
+			if(grid[x][y_more].status != '.' || grid[x][y_more].status != '-' ) count++;
+		}
+		if(x_more <= _x && y_more <= _y)
+		{
+			if(grid[x_less][y_less].status != '.' || grid[x_less][y_less].status != '-' ) count++;
+		}*/
+		return count;
+
+	}
+
+
+	void printGrid()
+	{
+		for(int i = 0; i < this->_x; ++i)
+		{
+			for(int j = 0 ; j < this->_y; ++j)
+			{
+				cout << grid[i][j];
+			}
+			cout << endl;
+		}
+	}
+	
 
 
 
@@ -128,7 +197,7 @@ public:
 			vector<T> a;
 			for(int j = 0; j < y; j++)
 			{
-				a = vector<T>(x);
+				a = vector<T>(y);
 			}
 			grid.push_back(a);
 		}
