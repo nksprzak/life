@@ -24,16 +24,17 @@ void Life<T>::printGrid()
 	{
 		for(int j = 0 ; j < this->_y; ++j)
 		{
-			cout >> grid[i][j]->status;
+			//wwcout >> grid[i][j]->status;
 		}
 		cout << endl;
 	}
 }
 
+/*
 int main()
 {
 	Life<Cell> a(8,8);
 	a.printGrid();
-	//solve(cin,cout);
+	
 	return 0;
-}
+}*/

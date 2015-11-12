@@ -9,7 +9,12 @@ int main()
 {
 	using namespace std;
 
+	//parse(cin);
+
 	cout << "*** Life<ConwayCell> 21x13 ***" << endl;
+
+	Life<ConwayCell> test(21,13);
+	test.parse(cin);
 
 	cout << "*** Life<ConwayCell> 20x29 ***" << endl;
 
