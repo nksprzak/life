@@ -16,8 +16,9 @@ class AbstractCell
 {
 protected:
 	bool alive;
-	char status; //for Conway status is * or . fredkin its - or (int),+
+	
 public:
+	char status; //for Conway status is * or . fredkin its - or (int),+
 	virtual int num_alive(int x, int y)=0;
 	virtual int num_dead(int x, int y)=0;
 	//virtual void execute();
@@ -38,7 +39,7 @@ public:
 	int num_alive(int x, int y);
 	int num_dead(int x, int y);
 
-	ConwayCell() {};
+	//ConwayCell() {};
 };
 
 class FredkinCell: public AbstractCell
@@ -64,7 +65,17 @@ private:
 
 public:
 	void execute(int steps);
-	void printGrid();
+	void printGrid()
+	{
+		for(int i = 0; i < this->_x; ++i)
+		{
+			for(int j = 0 ; j < this->_y; ++j)
+			{
+				cout << grid[i][j].status;
+			}
+			cout << endl;
+		}
+	}
 	void parse(istream& r)
 	{
 		string s;
@@ -84,10 +95,7 @@ public:
 		getline(r,s);
 		int num_of_prints = stoi(s,&sz);
 		
-		/*if(cell_type == "ConwayCell") Life<ConwayCell> w(rows,cols);
-		if(cell_type == "FredkinCell") Life<FredkinCell> w(rows,cols);
-		else Life<Cell> w(rows,cols);*/
-		//Life<Cell> w(rows,cols);
+		
 		int rs = 0;
 		int cs = 0;
 		while(getline(r,s) && !s.empty())
@@ -97,12 +105,12 @@ public:
 			stringstream in(s);
 			while(in >> buf)
 			{
-				ConwayCell a();
-				grid[rs][cs] = a;
-				/*ConwayCell a();
-				w.grid[rs][cs] = a;*/
-				cout << rs << cs << endl;
+				T f;
+				f.status = buf;
+				assert(rs!= rows || cs != cols);
+				grid[rs][cs] = f;
 				cs++;
+				//cout << rs << " " << cs << endl;
 			}
 			cs = 0;
 			rs++;
