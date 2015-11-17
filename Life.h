@@ -19,10 +19,8 @@ protected:
 	char status;
 	
 public:
-	 //for Conway status is * or . fredkin its - or (int),+
-	/*virtual int num_alive(int x, int y)=0;
-	virtual int num_dead(int x, int y)=0;*/
-	//virtual void execute();
+	virtual bool isAlive() {return alive;};
+	
 };
 
 class Cell
@@ -30,7 +28,12 @@ class Cell
 private:
 	AbstractCell* p;
 public:
-	Cell() {};
+	Cell() {
+
+	};
+
+
+	bool isAlive() {return p->isAlive();};
 
 };
 
@@ -46,6 +49,8 @@ public:
 
 	ConwayCell(char b) {
 		status = b;
+		if(b == '*') alive = true;
+		else alive = false;
 	};
 
 	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
@@ -66,7 +71,9 @@ public:
 	FredkinCell() {};
 	FredkinCell(char s) {
 		status = s;
-		//age = a;
+		if(s == '-') alive = false;
+		else alive = true;
+		//ab ge = a;
 	};
 	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
 	{
@@ -112,6 +119,12 @@ public:
 		
 		int rs = 0;
 		int cs = 0;
+		//if(cell_type = )
+		/*for(int i =0; i < _y; i++)
+		{
+			T f('&');
+			grid[0][i] = f;
+		}*/
 		while(getline(r,s) && !s.empty())
 		{
 			char buf;
@@ -137,38 +150,49 @@ public:
 		int count = 0;
 		int x_less = x -1 ; int y_less = y -1;
 		int x_more = x + 1; int y_more = y + 1;
-	/*	if(x_less >= 0 && y_less >= 0)
+		//cout << grid[x][y] << endl;
+		if(x_less >= 0 && y_less >= 0)
 		{
-			if(grid[x_less][y_less].status != '.' || grid[x_less][y_less].status != '-' ) count++;
+			//cout << ""
+			//cout << grid[x_less][y_less].isAlive() << endl;
+			if(grid[x_less][y_less].isAlive()) count++;
+		}
+		if(x_less >= 0 && y >= 0)
+		{
+			//cout << grid[x_less][y].isAlive() << endl;
+			if(grid[x_less][y].isAlive()) count++;
+		}
+		if(x_less >= 0 && y_more < _y)
+		{
+			//cout << x_more << y_less << endl;
+			//cout << grid[x_more][y_less] << endl;
+			if(grid[x_less][y_more].isAlive()) count++;
 		}
 		if(x >= 0 && y_less >= 0)
 		{
-			if(grid[x][y_less].status != '.' || grid[x][y_less].status != '-' ) count++;
+			//cout << grid[x][y_less].isAlive() << endl;
+			if(grid[x][y_less].isAlive()) count++;
 		}
-		if(x_more <= _x && y_less >= 0)
+		if(x >= 0 && y_more < _y)
 		{
-			if(grid[x_more][y_less].status != '.' || grid[x_more][y_less].status != '-' ) count++;
+			//cout << grid[x][y_more].isAlive() << endl;
+			if(grid[x][y_more].isAlive()) count++;
 		}
-		if(x_less >= 0 && y>=0)
+		if(x_more < _x && y_less >= 0)
 		{
-			if(grid[x_less][y].status != '.' || grid[x_less][y].status != '-' ) count++;
+			//cout << grid[x_more][y_less].isAlive() << endl;
+			if(grid[x_more][y_less].isAlive()) count++;
 		}
-		if(x_more <= _x && y >= 0 )
+		if(x_more < _x && y >= 0)
 		{
-			if(grid[x_more][y].status != '.' || grid[x_more][y].status != '-' ) count++;
+			//cout << grid[x_more][y].isAlive() << endl;
+			if(grid[x_more][y].isAlive()) count++;
 		}
-		if(x_less >= 0 && y_more <= _y)
+		if(x_more < _x && y_more < _y)
 		{
-			if(grid[x_less][y_more].status != '.' || grid[x_less][y_more].status != '-' ) count++;
+			//cout << grid[x_more][y_more].isAlive() << endl;
+			if(grid[x_more][y_more].isAlive()) count++;
 		}
-		if(x >= 0 && y_more <= _y)
-		{
-			if(grid[x][y_more].status != '.' || grid[x][y_more].status != '-' ) count++;
-		}
-		if(x_more <= _x && y_more <= _y)
-		{
-			if(grid[x_less][y_less].status != '.' || grid[x_less][y_less].status != '-' ) count++;
-		}*/
 		return count;
 
 	}
