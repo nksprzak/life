@@ -72,9 +72,10 @@ Doxyfile:
 	doxygen -g
 
 TestLife: Life.h TestLife.c++
-	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Testlife.c++ life.c++ -o TestLife $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) TestLife.c++ Life.c++ -o TestLife $(LDFLAGS)
 
 TestLife.tmp: TestLife
 	$(VALGRIND) ./TestLife                                       >  TestLife.tmp 2>&1
+	$(GCOV) -b Life.c++ | grep -A 5 "File 'Life.c++'" >> TestLife.tmp
 	$(GCOV) -b TestLife.c++ | grep -A 5 "File 'TestLife.c++'" >> TestLife.tmp
-	cat Testlife.tmp
+	cat TestLife.tmp

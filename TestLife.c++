@@ -247,3 +247,27 @@ TEST(TestLifeNeighs, alive3)
 	test.parseFile(r);
 	ASSERT_EQ(test.alive_neighs(0,0),3);
 }
+TEST(TestLifeExecute, l_exe1)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n.*\n**");
+	test.parseFile(r);
+	test.execute();
+	ASSERT_EQ(test.grid[0][0].isStatus(),'*');
+}
+TEST(TestLifeExecute, l_exe2)
+{
+	Life<FredkinCell> test(2,2);
+	istringstream r("FredkinCell\n2\n2\n1\n1\n--\n-0");
+	test.parseFile(r);
+	test.execute();
+	ASSERT_EQ(test.grid[1][0].isStatus(),'0');
+}
+TEST(TestLifeExecute, l_exe3)
+{
+	Life<Cell> test(2,2);
+	istringstream r("Cell\n2\n2\n1\n1\n-0\n--");
+	test.parseFile(r);
+	test.execute();
+	ASSERT_EQ(test.grid[0][0].isStatus(),'0');
+}
