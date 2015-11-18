@@ -12,6 +12,8 @@
 
 using namespace std;
 
+class FredkinCell;
+
 class AbstractCell
 {
 protected:
@@ -20,6 +22,8 @@ protected:
 	
 public:
 	virtual bool isAlive() {return alive;};
+	virtual char isStatus(){return status;}
+	virtual void cell_Execute(int neighs){};
 	
 };
 
@@ -28,12 +32,18 @@ class Cell
 private:
 	AbstractCell* p;
 public:
-	Cell() {
+	Cell(char b) {
+
+		//p->status = b;
+		//FredkinCell buf = new FredkinCell(b);
+		//p = buf;
 
 	};
 
 
 	bool isAlive() {return p->isAlive();};
+
+	//char status() {return p->statu}
 
 };
 
@@ -53,6 +63,26 @@ public:
 		else alive = false;
 	};
 
+	void cell_Execute(int n)
+	{
+		if(alive)
+		{
+			if(n < 2 || n > 3)
+			{
+				alive = false;
+				status = '.';	
+			} 
+		}
+		else
+		{
+			if(n == 3)
+			{
+				alive = true;
+				status = '*';
+			} 
+		}
+	}
+
 	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
 	{
 		os << sp.status;
@@ -63,22 +93,51 @@ public:
 class FredkinCell: public AbstractCell
 {
 private:
-	int age;
+	char age;
 public:
-	/*int num_alive(int x, int y);
-	int num_dead(int x, int y);
-	*/
 	FredkinCell() {};
 	FredkinCell(char s) {
 		status = s;
+		age = 48;
 		if(s == '-') alive = false;
 		else alive = true;
-		//ab ge = a;
 	};
 	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
 	{
 		os << sp.status;
 		return os;
+	}
+	void cell_Execute(int n)
+	{
+		if(alive)
+		{
+			if(n == 0 || n == 2 || n == 4)
+			{
+				 alive = false;
+				 status = '-';
+			}
+			else
+			{
+				age++;
+				if( age <= 57 && age >= 48)
+				{
+					status = age;
+				}
+				else
+				{
+					status = '+';
+				}
+			} 
+		}
+		else
+		{
+			if(n== 1 || n== 3)
+			{
+				alive = true;
+				age = 48;
+				status = '0';	
+			} 
+		}
 	}
 };
 
@@ -89,7 +148,6 @@ class Life
 
 private:
 	vector<vector<T> > grid;
-
 	vector<T> cells;
 	int _x;
 	int _y;
@@ -114,17 +172,9 @@ public:
 		int iterations = stoi(s,&sz);
 		cout << iterations << endl;
 		getline(r,s);
-		int num_of_prints = stoi(s,&sz);
-		
-		
+		int num_of_prints = stoi(s,&sz);	
 		int rs = 0;
 		int cs = 0;
-		//if(cell_type = )
-		/*for(int i =0; i < _y; i++)
-		{
-			T f('&');
-			grid[0][i] = f;
-		}*/
 		while(getline(r,s) && !s.empty())
 		{
 			char buf;
@@ -151,7 +201,7 @@ public:
 		int x_less = x -1 ; int y_less = y -1;
 		int x_more = x + 1; int y_more = y + 1;
 		//cout << grid[x][y] << endl;
-		if(x_less >= 0 && y_less >= 0)
+		if(x_less >= 0 && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
 			//cout << ""
 			//cout << grid[x_less][y_less].isAlive() << endl;
@@ -162,7 +212,7 @@ public:
 			//cout << grid[x_less][y].isAlive() << endl;
 			if(grid[x_less][y].isAlive()) count++;
 		}
-		if(x_less >= 0 && y_more < _y)
+		if(x_less >= 0 && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
 			//cout << x_more << y_less << endl;
 			//cout << grid[x_more][y_less] << endl;
@@ -178,7 +228,7 @@ public:
 			//cout << grid[x][y_more].isAlive() << endl;
 			if(grid[x][y_more].isAlive()) count++;
 		}
-		if(x_more < _x && y_less >= 0)
+		if(x_more < _x && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
 			//cout << grid[x_more][y_less].isAlive() << endl;
 			if(grid[x_more][y_less].isAlive()) count++;
@@ -188,7 +238,7 @@ public:
 			//cout << grid[x_more][y].isAlive() << endl;
 			if(grid[x_more][y].isAlive()) count++;
 		}
-		if(x_more < _x && y_more < _y)
+		if(x_more < _x && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
 			//cout << grid[x_more][y_more].isAlive() << endl;
 			if(grid[x_more][y_more].isAlive()) count++;
@@ -210,7 +260,31 @@ public:
 		}
 	}
 	
+	void execute()
+	{
+		vector<vector<int> > cells_neighs(_x,vector<int>(_y));
+		for(int i = 0; i < _x; i++)
+		{
+			vector<int> buf;
+			for(int j =0 ; j < _y; j++)
+			{
+				cells_neighs[i][j] = alive_neighs(i,j);
+				//cout << alive_neighs(i,j);
+				//cout << type(T);
+			}
+			//cout << endl;
+		}
+		cout << endl;
+		for(int i = 0; i < _x; i++)
+		{
+			for(int j =0 ; j < _y; j++)
+			{
 
+				grid[i][j].cell_Execute(cells_neighs[i][j]);
+			}
+		}
+		printGrid();
+	}
 
 
 	Life<T>(int x, int y){
