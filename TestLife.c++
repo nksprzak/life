@@ -61,9 +61,6 @@ TEST(TestCellExecute, c_exe1)
 {
 	Cell test = Cell('*');
 	test.p = new ConwayCell('*');
-	Life<Cell> world(2,2);
-	istringstream r("Cell\n2\n2\n1\n1\n..\n.*");
-	world.parseFile(r);
 	test.cell_Execute(0);
 	ASSERT_EQ(test.isAlive(),false);
 
@@ -72,9 +69,6 @@ TEST(TestCellExecute, c_exe2)
 {
 	Cell test = Cell('.');
 	test.p = new ConwayCell('.');
-	Life<Cell> world(2,2);
-	istringstream r("Cell\n2\n2\n1\n1\n..\n.*");
-	world.parseFile(r);
 	test.cell_Execute(3);
 	ASSERT_EQ(test.isAlive(),true);
 }
@@ -82,9 +76,6 @@ TEST(TestCellExecute, c_exe3)
 {
 	Cell test = Cell('-');
 	test.p = new FredkinCell('-');
-	Life<Cell> world(2,2);
-	istringstream r("Cell\n2\n2\n1\n1\n--\n--");
-	world.parseFile(r);
 	test.cell_Execute(1);
 	ASSERT_EQ(test.isAlive(),true);
 }
@@ -113,4 +104,41 @@ TEST(TestConwayContructor, conway1)
 {
 	ConwayCell test = ConwayCell('*');
 	ASSERT_EQ(test.status,'*');
+}
+TEST(TestConwayContructor, conway2)
+{
+	ConwayCell test = ConwayCell('.');
+	ASSERT_EQ(test.status,'.');
+}
+TEST(TestConwayExecute, c_exe1)
+{
+	ConwayCell test = ConwayCell('*');
+	test.cell_Execute(0);
+	ASSERT_FALSE(test.alive);
+}
+TEST(TestConwayExecute, c_exe2)
+{
+	ConwayCell test = ConwayCell('.');
+	test.cell_Execute(3);
+	ASSERT_TRUE(test.alive);
+}
+TEST(TestConwayExecute, c_exe3)
+{
+	ConwayCell test = ConwayCell('*');
+	test.cell_Execute(4);
+	ASSERT_FALSE(test.alive);
+}
+TEST(TestConwayPrint, c_print1)
+{
+	ConwayCell test = ConwayCell('*');
+	ostringstream o;
+	o << test;
+	ASSERT_EQ(o.str(),"*");
+}
+TEST(TestConwayPrint, c_print2)
+{
+	ConwayCell test = ConwayCell('.');
+	ostringstream o;
+	o << test;
+	ASSERT_EQ(o.str(),".");
 }

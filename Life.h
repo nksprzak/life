@@ -23,7 +23,10 @@ protected:
 	char status;
 
 	FRIEND_TEST(TestConwayContructor, conway1);
-	
+	FRIEND_TEST(TestConwayContructor, conway2);
+	FRIEND_TEST(TestConwayExecute, c_exe1);
+	FRIEND_TEST(TestConwayExecute, c_exe2);
+	FRIEND_TEST(TestConwayExecute, c_exe3);
 public:
 	virtual bool isAlive() {return alive;};
 	virtual char isStatus(){return status;}
