@@ -109,3 +109,8 @@ TEST(TestCellPrint, c_print3)
 	o << test;
 	ASSERT_EQ(o.str(),"0");
 }
+TEST(TestConwayContructor, conway1)
+{
+	ConwayCell test = ConwayCell('*');
+	ASSERT_EQ(test.status,'*');
+}

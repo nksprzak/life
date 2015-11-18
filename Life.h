@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <sstream>
 
+#include "gtest/gtest.h"
+
 #ifndef Life_h
 #define Life_h
 
@@ -19,6 +21,8 @@ class AbstractCell
 protected:
 	bool alive;
 	char status;
+
+	FRIEND_TEST(TestConwayContructor, conway1);
 	
 public:
 	virtual bool isAlive() {return alive;};
@@ -32,6 +36,16 @@ class Cell
 private:
 	AbstractCell* p;
 	char status;
+
+	FRIEND_TEST(TestCellConstructor, con1);
+	FRIEND_TEST(TestCellConstructor, con2);
+	FRIEND_TEST(TestCellConstructor, con3);
+	FRIEND_TEST(TestCellAlive, ali1);
+	FRIEND_TEST(TestCellAlive, ali2);
+	FRIEND_TEST(TestCellAlive, ali3);
+	FRIEND_TEST(TestCellExecute, c_exe1);
+	FRIEND_TEST(TestCellExecute, c_exe2);
+	FRIEND_TEST(TestCellExecute, c_exe3);
 public:
 	Cell(){};
 
@@ -48,6 +62,8 @@ public:
 		os << sp.status;
 		return os;
 	}
+
+	
 
 };
 
@@ -119,9 +135,9 @@ public:
 		getline(r,s);
 		cell_type = s;
 		getline(r,s);
-		int rows = stoi(s,&sz);
+		//int rows = stoi(s,&sz);
 		getline(r,s);
-		int cols = stoi(s,&sz);
+		//int cols = stoi(s,&sz);
 		getline(r,s);
 		iterations = stoi(s,&sz);
 		getline(r,s);
@@ -213,7 +229,6 @@ public:
 				cells_neighs[i][j] = alive_neighs(i,j);
 			}
 		}
-		//cout << endl;
 		for(int i = 0; i < _x; i++)
 		{
 			for(int j =0 ; j < _y; j++)
@@ -225,7 +240,7 @@ public:
 
 	void run()
 	{
-		cout << "Generation = 0, Population =" << getPopulation() <<endl;
+		cout << "Generation = 0, Population = " << getPopulation() <<endl;
 		printGrid();
 		cout << endl;
 		for(int i = 1; i <= iterations; i++)
