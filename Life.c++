@@ -8,43 +8,59 @@ Cell::Cell(char b)
 }
 
 void Cell::cell_Execute(int n)
-	{
-		p->cell_Execute(n);
-		status = p->isStatus();
-		if(status =='2')
-		{
-			p = new ConwayCell('*');
-			status = '*';
-		} 
-	};
-
-
-/*int ConwayCell::num_alive(int x, int y)
 {
-	for(int r = 0; r < x; r++)
+	p->cell_Execute(n);
+	status = p->isStatus();
+	if(status =='2')
 	{
-		for(int c = 0; c < y; c++)
-		{
+		p = new ConwayCell('*');
+		status = '*';
+	} 
+}
 
+void FredkinCell::cell_Execute(int n)
+{
+	if(alive)
+	{
+		if(n == 0 || n == 2 || n == 4)
+		{
+			alive = false;
+			status = '-';
 		}
+		else
+		{
+			age++;
+			if( age <= 57 && age >= 48)	status = age;
+			else status = '+';
+		} 
+	}
+	else
+	{
+		if(n== 1 || n== 3)
+		{
+			alive = true;
+			age = 48;
+			status = '0';	
+		} 
 	}
 }
 
-int ConwayCell::num_dead(int x, int y)
+void ConwayCell::cell_Execute(int n)
 {
-	return 0;
-}*/
-/*template <typename T>
-void Life<T>::parseFile(istream& r)
+	if(alive)
 	{
-		
-	}*/
-
-/*
-int main()
-{
-	Life<Cell> a(8,8);
-	a.printGrid();
-	
-	return 0;
-}*/
+		if(n < 2 || n > 3)
+		{
+			alive = false;
+			status = '.';	
+		} 
+	}
+	else
+	{
+		if(n == 3)
+		{
+			alive = true;
+			status = '*';
+		} 
+	}
+}

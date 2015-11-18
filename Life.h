@@ -67,25 +67,7 @@ public:
 		else alive = false;
 	};
 
-	void cell_Execute(int n)
-	{
-		if(alive)
-		{
-			if(n < 2 || n > 3)
-			{
-				alive = false;
-				status = '.';	
-			} 
-		}
-		else
-		{
-			if(n == 3)
-			{
-				alive = true;
-				status = '*';
-			} 
-		}
-	}
+	void cell_Execute(int n);
 
 	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
 	{
@@ -111,38 +93,7 @@ public:
 		os << sp.status;
 		return os;
 	}
-	void cell_Execute(int n)
-	{
-		if(alive)
-		{
-			if(n == 0 || n == 2 || n == 4)
-			{
-				 alive = false;
-				 status = '-';
-			}
-			else
-			{
-				age++;
-				if( age <= 57 && age >= 48)
-				{
-					status = age;
-				}
-				else
-				{
-					status = '+';
-				}
-			} 
-		}
-		else
-		{
-			if(n== 1 || n== 3)
-			{
-				alive = true;
-				age = 48;
-				status = '0';	
-			} 
-		}
-	}
+	void cell_Execute(int n);
 };
 
 
@@ -156,27 +107,25 @@ private:
 	int _x;
 	int _y;
 	string cell_type;
+	int iterations;
+	int num_of_prints;
+	int population;
 
 public:
-	void execute(int steps);
 	void parseFile(istream& r)
 	{
 		string s;
 		string::size_type sz;
 		getline(r,s);
 		cell_type = s;
-		cout << s << endl;
 		getline(r,s);
 		int rows = stoi(s,&sz);
-		cout << rows << endl;;
 		getline(r,s);
 		int cols = stoi(s,&sz);
-		cout << cols << endl;;
 		getline(r,s);
-		int iterations = stoi(s,&sz);
-		cout << iterations << endl;
+		iterations = stoi(s,&sz);
 		getline(r,s);
-		int num_of_prints = stoi(s,&sz);	
+		num_of_prints = stoi(s,&sz);	
 		int rs = 0;
 		int cs = 0;
 		while(getline(r,s) && !s.empty())
@@ -264,7 +213,7 @@ public:
 				cells_neighs[i][j] = alive_neighs(i,j);
 			}
 		}
-		cout << endl;
+		//cout << endl;
 		for(int i = 0; i < _x; i++)
 		{
 			for(int j =0 ; j < _y; j++)
@@ -272,7 +221,38 @@ public:
 				grid[i][j].cell_Execute(cells_neighs[i][j]);
 			}
 		}
+	}
+
+	void run()
+	{
+		cout << "Generation = 0, Population =" << getPopulation() <<endl;
 		printGrid();
+		cout << endl;
+		for(int i = 1; i <= iterations; i++)
+		{
+			execute();
+			if(i%num_of_prints == 0)
+			{
+				
+				cout << "Generation = " << i << ", " << "Population = " << getPopulation() << endl;
+				printGrid();
+				cout << endl;
+			} 
+			population = 0;
+		}
+	}
+
+	int getPopulation()
+	{
+		population = 0;
+		for(int i = 0; i < _x; i++)
+		{
+			for(int j = 0; j < _y; j++)
+			{
+				if(grid[i][j].isStatus()!='.'&&grid[i][j].isStatus()!='-') population++;
+			}
+		}
+		return population;
 	}
 
 
