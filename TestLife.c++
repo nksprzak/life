@@ -142,3 +142,51 @@ TEST(TestConwayPrint, c_print2)
 	o << test;
 	ASSERT_EQ(o.str(),".");
 }
+TEST(TestFredkinConstructor, fred_con1)
+{
+	FredkinCell test = FredkinCell('0');
+	ASSERT_EQ(test.status,'0');
+}
+TEST(TestFredkinConstructor, fred_con2)
+{
+	FredkinCell test = FredkinCell('-');
+	ASSERT_EQ(test.status,'-');
+}
+TEST(TestFredkinConstructor, fred_con3)
+{
+	FredkinCell test = FredkinCell('3');
+	ASSERT_EQ(test.status,'3');
+}
+
+TEST(TestFredkinExecute, f_exe1)
+{
+	FredkinCell test = FredkinCell('0');
+	test.cell_Execute(0);
+	ASSERT_FALSE(test.alive);
+}
+TEST(TestFredkinExecute, f_exe2)
+{
+	FredkinCell test = FredkinCell('-');
+	test.cell_Execute(1);
+	ASSERT_TRUE(test.alive);
+}
+TEST(TestFredkinExecute, f_exe3)
+{
+	FredkinCell test = FredkinCell('0');
+	test.cell_Execute(1);
+	ASSERT_EQ(test.status,'1');
+}
+TEST(TestFredkinPrint, f_print1)
+{
+	FredkinCell test = FredkinCell('-');
+	ostringstream o;
+	o << test;
+	ASSERT_EQ(o.str(),"-");
+}
+TEST(TestFredkinPrint, f_print2)
+{
+	FredkinCell test = FredkinCell('0');
+	ostringstream o;
+	o << test;
+	ASSERT_EQ(o.str(),"0");
+}

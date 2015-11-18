@@ -24,9 +24,16 @@ protected:
 
 	FRIEND_TEST(TestConwayContructor, conway1);
 	FRIEND_TEST(TestConwayContructor, conway2);
+	FRIEND_TEST(TestFredkinConstructor, fred_con1);
+	FRIEND_TEST(TestFredkinConstructor, fred_con2);
+	FRIEND_TEST(TestFredkinConstructor, fred_con3);
 	FRIEND_TEST(TestConwayExecute, c_exe1);
 	FRIEND_TEST(TestConwayExecute, c_exe2);
 	FRIEND_TEST(TestConwayExecute, c_exe3);
+	FRIEND_TEST(TestFredkinExecute, f_exe1);
+	FRIEND_TEST(TestFredkinExecute, f_exe2);
+	FRIEND_TEST(TestFredkinExecute, f_exe3);
+
 public:
 	virtual bool isAlive() {return alive;};
 	virtual char isStatus(){return status;}
@@ -49,6 +56,7 @@ private:
 	FRIEND_TEST(TestCellExecute, c_exe1);
 	FRIEND_TEST(TestCellExecute, c_exe2);
 	FRIEND_TEST(TestCellExecute, c_exe3);
+
 public:
 	Cell(){};
 
@@ -107,12 +115,12 @@ public:
 		if(s == '-') alive = false;
 		else alive = true;
 	};
+	void cell_Execute(int n);
 	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
 	{
 		os << sp.status;
 		return os;
 	}
-	void cell_Execute(int n);
 };
 
 
