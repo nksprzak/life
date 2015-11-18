@@ -190,3 +190,39 @@ TEST(TestFredkinPrint, f_print2)
 	o << test;
 	ASSERT_EQ(o.str(),"0");
 }
+TEST(TestLifeConstructor, life1)
+{
+	Life<ConwayCell> test(1,1);
+	ASSERT_EQ(test._x,1);
+}
+TEST(TestLifeConstructor, life2)
+{
+	Life<FredkinCell> test(1,1);
+	ASSERT_EQ(test._x,1);
+}
+TEST(TestLifeConstructor, life3)
+{
+	Life<Cell> test(2,2);
+	ASSERT_EQ(test._y,2);
+}
+TEST(TestLifeParse, parse1)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n..\n..");
+	test.parseFile(r);
+	ASSERT_EQ(test.cell_type,"ConwayCell");
+}
+TEST(TestLifeParse, parse2)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n..\n..");
+	test.parseFile(r);
+	ASSERT_EQ(test.iterations,1);
+}
+TEST(TestLifeParse, parse3)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n..\n..");
+	test.parseFile(r);
+	ASSERT_EQ(test.num_of_prints,1);
+}

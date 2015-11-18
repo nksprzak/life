@@ -138,6 +138,14 @@ private:
 	int num_of_prints;
 	int population;
 
+	FRIEND_TEST(TestLifeConstructor, life1);
+	FRIEND_TEST(TestLifeConstructor, life2);
+	FRIEND_TEST(TestLifeConstructor, life3);
+	FRIEND_TEST(TestLifeParse, parse1);
+	FRIEND_TEST(TestLifeParse, parse2);
+	FRIEND_TEST(TestLifeParse, parse3);
+
+
 public:
 	void parseFile(istream& r)
 	{
@@ -259,7 +267,6 @@ public:
 			execute();
 			if(i%num_of_prints == 0)
 			{
-				
 				cout << "Generation = " << i << ", " << "Population = " << getPopulation() << endl;
 				printGrid();
 				cout << endl;
