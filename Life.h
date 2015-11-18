@@ -189,7 +189,7 @@ public:
 		int x_less = x -1 ; int y_less = y -1;
 		int x_more = x + 1; int y_more = y + 1;
 	
-		if(x_less >= 0 && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
+		if((x_less >= 0 && y_less >= 0 && grid[x][y].isStatus() == '.' )|| grid[x][y].isStatus() == '*' )
 		{
 			if(grid[x_less][y_less].isAlive()) count++;
 		}
@@ -197,7 +197,7 @@ public:
 		{
 			if(grid[x_less][y].isAlive()) count++;
 		}
-		if(x_less >= 0 && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
+		if((x_less >= 0 && y_more < _y && grid[x][y].isStatus() == '.' )|| grid[x][y].isStatus() == '*' )
 		{
 			if(grid[x_less][y_more].isAlive()) count++;
 		}
@@ -209,7 +209,7 @@ public:
 		{
 			if(grid[x][y_more].isAlive()) count++;
 		}
-		if(x_more < _x && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
+		if((x_more < _x && y_less >= 0 && grid[x][y].isStatus() == '.' )|| grid[x][y].isStatus() == '*' )
 		{
 			if(grid[x_more][y_less].isAlive()) count++;
 		}
@@ -217,7 +217,7 @@ public:
 		{
 			if(grid[x_more][y].isAlive()) count++;
 		}
-		if(x_more < _x && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
+		if((x_more < _x && y_more < _y && grid[x][y].isStatus() == '.' )|| grid[x][y].isStatus() == '*' )
 		{
 			if(grid[x_more][y_more].isAlive()) count++;
 		}

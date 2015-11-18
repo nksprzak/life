@@ -226,3 +226,24 @@ TEST(TestLifeParse, parse3)
 	test.parseFile(r);
 	ASSERT_EQ(test.num_of_prints,1);
 }
+TEST(TestLifeNeighs, alive1)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n..\n.*");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,0),1);
+}
+TEST(TestLifeNeighs, alive2)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n..\n**");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,0),2);
+}
+TEST(TestLifeNeighs, alive3)
+{
+	Life<ConwayCell> test(2,2);
+	istringstream r("ConwayCell\n2\n2\n1\n1\n.*\n**");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,0),3);
+}
