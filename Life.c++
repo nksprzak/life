@@ -1,7 +1,25 @@
 #include "Life.h"
 
+Cell::Cell(char b)
+{
+	status = b;
+	if(b=='*'||b=='.') p = new ConwayCell(b);
+	else p = new FredkinCell(b);
+}
 
-int ConwayCell::num_alive(int x, int y)
+void Cell::cell_Execute(int n)
+	{
+		p->cell_Execute(n);
+		status = p->isStatus();
+		if(status =='2')
+		{
+			p = new ConwayCell('*');
+			status = '*';
+		} 
+	};
+
+
+/*int ConwayCell::num_alive(int x, int y)
 {
 	for(int r = 0; r < x; r++)
 	{
@@ -15,7 +33,7 @@ int ConwayCell::num_alive(int x, int y)
 int ConwayCell::num_dead(int x, int y)
 {
 	return 0;
-}
+}*/
 /*template <typename T>
 void Life<T>::parseFile(istream& r)
 	{

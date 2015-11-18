@@ -31,19 +31,23 @@ class Cell
 {
 private:
 	AbstractCell* p;
+	char status;
 public:
-	Cell(char b) {
+	Cell(){};
 
-		//p->status = b;
-		//FredkinCell buf = new FredkinCell(b);
-		//p = buf;
-
-	};
+	Cell(char b);
 
 
 	bool isAlive() {return p->isAlive();};
 
-	//char status() {return p->statu}
+	char isStatus() {return p->isStatus();};
+	void cell_Execute(int n);
+	
+	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
+	{
+		os << sp.status;
+		return os;
+	}
 
 };
 
@@ -53,11 +57,13 @@ public:
 	/*int num_alive(int x, int y);
 	int num_dead(int x, int y);*/
 
-	ConwayCell() {
+	ConwayCell() 
+	{
 		status = '*';
 	};
 
-	ConwayCell(char b) {
+	ConwayCell(char b) 
+	{
 		status = b;
 		if(b == '*') alive = true;
 		else alive = false;
@@ -151,16 +157,16 @@ private:
 	vector<T> cells;
 	int _x;
 	int _y;
+	string cell_type;
 
 public:
 	void execute(int steps);
 	void parseFile(istream& r)
 	{
-		//T f;
 		string s;
 		string::size_type sz;
 		getline(r,s);
-		string cell_type = s;
+		cell_type = s;
 		cout << s << endl;
 		getline(r,s);
 		int rows = stoi(s,&sz);
@@ -279,7 +285,6 @@ public:
 		{
 			for(int j =0 ; j < _y; j++)
 			{
-
 				grid[i][j].cell_Execute(cells_neighs[i][j]);
 			}
 		}
@@ -300,6 +305,8 @@ public:
 			grid.push_back(a);
 		}
 	};
+
+	//string type(){return cell_type;};
 
 };
 
