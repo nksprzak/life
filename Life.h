@@ -37,10 +37,10 @@ public:
 
 	Cell(char b);
 
-
 	bool isAlive() {return p->isAlive();};
 
 	char isStatus() {return p->isStatus();};
+
 	void cell_Execute(int n);
 	
 	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
@@ -54,9 +54,7 @@ public:
 class ConwayCell: public AbstractCell
 {
 public:
-	/*int num_alive(int x, int y);
-	int num_dead(int x, int y);*/
-
+	
 	ConwayCell() 
 	{
 		status = '*';
@@ -206,51 +204,40 @@ public:
 		int count = 0;
 		int x_less = x -1 ; int y_less = y -1;
 		int x_more = x + 1; int y_more = y + 1;
-		//cout << grid[x][y] << endl;
+	
 		if(x_less >= 0 && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
-			//cout << ""
-			//cout << grid[x_less][y_less].isAlive() << endl;
 			if(grid[x_less][y_less].isAlive()) count++;
 		}
 		if(x_less >= 0 && y >= 0)
 		{
-			//cout << grid[x_less][y].isAlive() << endl;
 			if(grid[x_less][y].isAlive()) count++;
 		}
 		if(x_less >= 0 && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
-			//cout << x_more << y_less << endl;
-			//cout << grid[x_more][y_less] << endl;
 			if(grid[x_less][y_more].isAlive()) count++;
 		}
 		if(x >= 0 && y_less >= 0)
 		{
-			//cout << grid[x][y_less].isAlive() << endl;
 			if(grid[x][y_less].isAlive()) count++;
 		}
 		if(x >= 0 && y_more < _y)
 		{
-			//cout << grid[x][y_more].isAlive() << endl;
 			if(grid[x][y_more].isAlive()) count++;
 		}
 		if(x_more < _x && y_less >= 0 && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
-			//cout << grid[x_more][y_less].isAlive() << endl;
 			if(grid[x_more][y_less].isAlive()) count++;
 		}
 		if(x_more < _x && y >= 0)
 		{
-			//cout << grid[x_more][y].isAlive() << endl;
 			if(grid[x_more][y].isAlive()) count++;
 		}
 		if(x_more < _x && y_more < _y && grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' )
 		{
-			//cout << grid[x_more][y_more].isAlive() << endl;
 			if(grid[x_more][y_more].isAlive()) count++;
 		}
 		return count;
-
 	}
 
 
@@ -275,10 +262,7 @@ public:
 			for(int j =0 ; j < _y; j++)
 			{
 				cells_neighs[i][j] = alive_neighs(i,j);
-				//cout << alive_neighs(i,j);
-				//cout << type(T);
 			}
-			//cout << endl;
 		}
 		cout << endl;
 		for(int i = 0; i < _x; i++)
@@ -305,9 +289,6 @@ public:
 			grid.push_back(a);
 		}
 	};
-
-	//string type(){return cell_type;};
-
 };
 
 
