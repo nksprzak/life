@@ -47,5 +47,9 @@ int main()
 	t4.parseFile(cin);
 	t4.printGrid();
 
+	cout << "*** Life<Cell> 20x20 ***" << endl;
+	Life<FredkinCell> t5(20,20);
+	t5.parseFile(cin);
+	t5.run();
 	return 0;
 }

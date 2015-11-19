@@ -1,7 +1,10 @@
 #include "Life.h"
 
+AbstractCell::~AbstractCell(){}
+
 Cell::Cell(char b)
 {
+	cout<<"creating cell"<<endl;
 	status = b;
 	//The status of the generic cell is used to determine
 	//The type of cell to be created
@@ -19,8 +22,11 @@ void Cell::cell_Execute(int n)
 	{
 		//In the case of a Cell if a fredkin cell would turn to age 2, it becomes a conway cell
 		//Needs memory management here
-		p = new ConwayCell('*');
+		
+		//delete p;
 		status = '*';
+		p = new ConwayCell(status);
+		
 	} 
 }
 
@@ -53,7 +59,24 @@ void FredkinCell::cell_Execute(int n)
 		} 
 	}
 }
+bool FredkinCell::isAlive()
+{
+	if(status != '-') return true;
+	return false;
+}
+char FredkinCell::isStatus()
+{
+	return status;
+}
 
+bool ConwayCell::isAlive()
+{
+	return status == '*';
+}
+char ConwayCell::isStatus()
+{
+	return status;
+}
 void ConwayCell::cell_Execute(int n)
 {
 	if(alive)

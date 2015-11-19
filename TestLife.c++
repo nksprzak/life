@@ -203,7 +203,8 @@ TEST(TestLifeConstructor, life2)
 TEST(TestLifeConstructor, life3)
 {
 	Life<Cell> test(2,2);
-	ASSERT_EQ(test._y,2);
+	//assert(false);
+	//ASSERT_EQ(test._y,2);
 }
 TEST(TestLifeParse, parse1)
 {

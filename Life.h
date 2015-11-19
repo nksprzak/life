@@ -21,7 +21,6 @@ class AbstractCell
 protected:
 	bool alive;
 	char status;
-
 	FRIEND_TEST(TestConwayContructor, conway1);
 	FRIEND_TEST(TestConwayContructor, conway2);
 	FRIEND_TEST(TestFredkinConstructor, fred_con1);
@@ -38,7 +37,60 @@ public:
 	virtual bool isAlive() {return alive;};
 	virtual char isStatus(){return status;}
 	virtual void cell_Execute(int neighs){};
+	virtual ~AbstractCell() = 0;
+
+};
+
+class ConwayCell: public AbstractCell
+{
+public:
 	
+	ConwayCell() 
+	{
+		status = '*';
+	};
+
+	ConwayCell(char b) 
+	{
+		//cout<<"create conway"<<endl;
+		status = b;
+		if(b == '*') alive = true;
+		else alive = false;
+	};
+	virtual ~ConwayCell() {};
+
+	void cell_Execute(int n);
+	bool isAlive();
+	char isStatus();
+	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
+	{
+		os << sp.status;
+		return os;
+	}
+};
+
+class FredkinCell: public AbstractCell
+{
+private:
+	char age;
+public:
+	FredkinCell() {};
+	FredkinCell(char s) {
+		//cout<<"create fred"<<endl;
+		status = s;
+		age = 48;
+		if(s == '-') alive = false;
+		else alive = true;
+	};
+	virtual ~FredkinCell() {};
+	bool isAlive();
+	char isStatus();
+	void cell_Execute(int n);
+	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
+	{
+		os << sp.status;
+		return os;
+	}
 };
 
 class Cell
@@ -60,15 +112,20 @@ private:
 	FRIEND_TEST(TestCellExecute, c_exe3);
 
 public:
-	Cell(){};
+	Cell()
+	{
+		cout<<"creating cell"<<endl;
+	    status = '.'; 
+		p = NULL;
+	};
 
 	Cell(char b);
-
+	~Cell(){delete p;}
 	bool isAlive() {return p->isAlive();};
 	//the status of the cell is used in computing live neighbors
 	char isStatus() {return p->isStatus();};
 	void cell_Execute(int n);
-	
+
 	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
 	{
 		os << sp.status;
@@ -77,51 +134,6 @@ public:
 
 	
 
-};
-
-class ConwayCell: public AbstractCell
-{
-public:
-	
-	ConwayCell() 
-	{
-		status = '*';
-	};
-
-	ConwayCell(char b) 
-	{
-		status = b;
-		if(b == '*') alive = true;
-		else alive = false;
-	};
-
-	void cell_Execute(int n);
-
-	friend std::ostream& operator << (std::ostream& os, const ConwayCell& sp)
-	{
-		os << sp.status;
-		return os;
-	}
-};
-
-class FredkinCell: public AbstractCell
-{
-private:
-	char age;
-public:
-	FredkinCell() {};
-	FredkinCell(char s) {
-		status = s;
-		age = 48;
-		if(s == '-') alive = false;
-		else alive = true;
-	};
-	void cell_Execute(int n);
-	friend std::ostream& operator << (std::ostream& os, const FredkinCell& sp)
-	{
-		os << sp.status;
-		return os;
-	}
 };
 
 
@@ -152,12 +164,15 @@ private:
 public:
 	//Reads the input file and generates the experiments to be performed
 	//Requires certain syntax on the input file
+	~Life(){};
+
 	void parseFile(istream& r)
 	{
 		string s;
 		string::size_type sz;
 		getline(r,s);
 		cell_type = s;
+		cout<<s<<endl;
 		getline(r,s);
 		getline(r,s);
 		getline(r,s);
@@ -298,7 +313,7 @@ public:
 		{
 			for(int j = 0; j < _y; j++)
 			{
-				if(grid[i][j].isStatus()!='.'&&grid[i][j].isStatus()!='-') population++;
+				if(grid[i][j].isAlive()) population++;
 			}
 		}
 		return population;
