@@ -45,6 +45,8 @@ class Cell
 {
 private:
 	AbstractCell* p;
+	//Since cell doesnt inherit from Abstract cell status
+	//needs to be added in order to properly parse the file
 	char status;
 
 	FRIEND_TEST(TestCellConstructor, con1);
@@ -63,9 +65,8 @@ public:
 	Cell(char b);
 
 	bool isAlive() {return p->isAlive();};
-
+	//the status of the cell is used in computing live neighbors
 	char isStatus() {return p->isStatus();};
-
 	void cell_Execute(int n);
 	
 	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
@@ -149,6 +150,8 @@ private:
 	FRIEND_TEST(TestLifeExecute, l_exe3);
 
 public:
+	//Reads the input file and generates the experiments to be performed
+	//Requires certain syntax on the input file
 	void parseFile(istream& r)
 	{
 		string s;
@@ -156,9 +159,7 @@ public:
 		getline(r,s);
 		cell_type = s;
 		getline(r,s);
-		//int rows = stoi(s,&sz);
 		getline(r,s);
-		//int cols = stoi(s,&sz);
 		getline(r,s);
 		iterations = stoi(s,&sz);
 		getline(r,s);
@@ -181,44 +182,54 @@ public:
 
 		}
 	}
+	/*Checks a potential of 8 neighbors for a conway cell and
+	4 neighbors for a fredkin cell. The type of cell is determined 
+	by life asking the status of the cell and determining the type 
+	from the returned value. Graph incies are verified before access
+	to deal with corner and edge cases, the number of alive neighbors
+	is then returned to the game of Life*/ 
 	int alive_neighs(int x, int y)
 	{
-		//replace x & y with the value youre looking at 
-		//were gunna check (x-1,y-1)(x,y-1),(x+1,y-1)
-		//				   (x -1, y)        (x+1,y)
-		//				   (x -1,y+1)(x,y+1)(x+1,y+1)
+		
 		int count = 0;
 		int x_less = x -1 ; int y_less = y -1;
 		int x_more = x + 1; int y_more = y + 1;
-	
+		//NW neighbor
 		if(x_less >= 0 && y_less >= 0 && (grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' ))
 		{
 			if(grid[x_less][y_less].isAlive()) count++;
 		}
+		//N neighbor
 		if(x_less >= 0 && y >= 0)
 		{
 			if(grid[x_less][y].isAlive()) count++;
 		}
+		//NE neighbor		
 		if(x_less >= 0 && y_more < _y && (grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' ))
 		{
 			if(grid[x_less][y_more].isAlive()) count++;
 		}
+		//W neighbor
 		if(x >= 0 && y_less >= 0)
 		{
 			if(grid[x][y_less].isAlive()) count++;
 		}
+		//E neighbor
 		if(x >= 0 && y_more < _y)
 		{
 			if(grid[x][y_more].isAlive()) count++;
 		}
+		//SW neighbor
 		if(x_more < _x && y_less >= 0 && (grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' ))
 		{
 			if(grid[x_more][y_less].isAlive()) count++;
 		}
+		//S neighbor
 		if(x_more < _x && y >= 0)
 		{
 			if(grid[x_more][y].isAlive()) count++;
 		}
+		//SE neighbor
 		if(x_more < _x && y_more < _y && (grid[x][y].isStatus() == '.' || grid[x][y].isStatus() == '*' ))
 		{
 			if(grid[x_more][y_more].isAlive()) count++;
@@ -226,7 +237,7 @@ public:
 		return count;
 	}
 
-
+	// Prints the game of life
 	void printGrid()
 	{
 		for(int i = 0; i < this->_x; ++i)
@@ -238,10 +249,11 @@ public:
 			cout << endl;
 		}
 	}
-	
+	//Iterates one generation of the game of life
 	void execute()
 	{
 		vector<vector<int> > cells_neighs(_x,vector<int>(_y));
+		//Creates a grid of # of live neighbors for each cell
 		for(int i = 0; i < _x; i++)
 		{
 			vector<int> buf;
@@ -250,6 +262,8 @@ public:
 				cells_neighs[i][j] = alive_neighs(i,j);
 			}
 		}
+		/*Tells each cell to execute based on its number of live neighbors.
+		cells handle their own execution*/
 		for(int i = 0; i < _x; i++)
 		{
 			for(int j =0 ; j < _y; j++)
@@ -258,7 +272,7 @@ public:
 			}
 		}
 	}
-
+	//executes the required amount of iterations per experiment
 	void run()
 	{
 		cout << "Generation = 0, Population = " << getPopulation() <<endl;
@@ -276,7 +290,7 @@ public:
 			population = 0;
 		}
 	}
-
+	//returns the number of live cells
 	int getPopulation()
 	{
 		population = 0;
