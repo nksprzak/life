@@ -48,8 +48,10 @@ int main()
 	t4.printGrid();
 
 	cout << "*** Life<Cell> 20x20 ***" << endl;
-	Life<FredkinCell> t5(20,20);
+	Life<Cell> t5(20,20);
+	cout<<"parsing"<<endl;
 	t5.parseFile(cin);
+	cout<<"running"<<endl;
 	t5.run();
 	return 0;
 }

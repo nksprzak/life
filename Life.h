@@ -34,10 +34,12 @@ protected:
 	FRIEND_TEST(TestFredkinExecute, f_exe3);
 
 public:
-	virtual bool isAlive() {return alive;};
+	virtual bool isAlive() {assert(false);
+		return alive;};
 	virtual char isStatus(){return status;}
 	virtual void cell_Execute(int neighs){};
-	virtual ~AbstractCell() = 0;
+	virtual ~AbstractCell(); 
+	virtual AbstractCell* clone() = 0;
 
 };
 
@@ -112,20 +114,22 @@ private:
 	FRIEND_TEST(TestCellExecute, c_exe3);
 
 public:
-	Cell()
+	Cell(){};
+	Cell(AbstractCell* ac)
 	{
-		cout<<"creating cell"<<endl;
-	    status = '.'; 
-		p = NULL;
-	};
-
+		p = ac;
+	}
+	Cell(Cell& c)
+	{
+		clone(c);
+	}
 	Cell(char b);
 	~Cell(){delete p;}
-	bool isAlive() {return p->isAlive();};
+	bool isAlive() {//cout<<p<<endl;
+		return p->isAlive();};
 	//the status of the cell is used in computing live neighbors
 	char isStatus() {return p->isStatus();};
 	void cell_Execute(int n);
-
 	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
 	{
 		os << sp.status;
@@ -172,7 +176,6 @@ public:
 		string::size_type sz;
 		getline(r,s);
 		cell_type = s;
-		cout<<s<<endl;
 		getline(r,s);
 		getline(r,s);
 		getline(r,s);
@@ -188,13 +191,33 @@ public:
 			stringstream in(s);
 			while(in >> buf)
 			{
-				T f(buf);
-				grid[rs][cs] = f;
-				cs++;
+				if(cell_type.compare("Cell")==0)
+				{
+					if(buf == '.' || buf == '*')
+					{
+						T f(new ConwayCell(buf));
+						grid[rs][cs] = f;
+						cs++;
+					}
+					else
+					{
+						T f(new FredkinCell(buf));
+						grid[rs][cs] = f;
+						cs++;
+					}
+
+
+				}
+				else
+				{
+					T f(buf);
+					grid[rs][cs] = f;
+					cs++;
+				}
+
 			}
 			cs = 0;
 			rs++;
-
 		}
 	}
 	/*Checks a potential of 8 neighbors for a conway cell and
