@@ -138,6 +138,10 @@ public:
 		return p->isAlive();};
 	//the status of the cell is used in computing live neighbors
 	char isStatus() {return p->isStatus();};
+    bool operator==(const Cell& c) const
+	{
+		return p->isStatus() == c.p->isStatus();
+	}
 	void cell_Execute(int n);
 
 
@@ -180,6 +184,8 @@ private:
 	FRIEND_TEST(TestLifeExecute, l_exe1);
 	FRIEND_TEST(TestLifeExecute, l_exe2);
 	FRIEND_TEST(TestLifeExecute, l_exe3);
+	FRIEND_TEST(TestIterator, iterate);
+	FRIEND_TEST(TestIterator, iterate2);
 
 public:
 	

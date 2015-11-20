@@ -446,3 +446,38 @@ TEST(TestIterator, at)
 	ASSERT_EQ(test.at(0).isStatus(),'-');
 
 }
+TEST(TestIterator, at2)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-*0\n.00\n-.0");
+	test.parseFile(r);
+	ASSERT_EQ(test.at(0).isStatus(),'-');
+	ASSERT_EQ(test.at(1).isStatus(),'*');
+	ASSERT_EQ(test.at(2).isStatus(),'0');
+
+}
+TEST(TestIterator, iterate)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-*0\n.00\n-.0");
+	test.parseFile(r);
+	auto it = test.begin();
+	ASSERT_EQ(*it,test.cells[0]);
+	it++;
+	ASSERT_EQ(*it,test.cells[1]);
+	it++;
+	ASSERT_EQ(*it,test.cells[2]);
+}
+
+TEST(TestIterator, iterate2)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-.-\n.00\n-.0");
+	test.parseFile(r);
+	auto it = test.begin();
+	ASSERT_EQ(*it,test.cells[0]);
+	it++;
+	ASSERT_EQ(*it,test.cells[1]);
+	it++;
+	ASSERT_EQ(*it,test.cells[2]);
+}
