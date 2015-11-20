@@ -26,19 +26,19 @@ TEST(TestCellConstructor, con3)
 TEST(TestCellAlive, ali1)
 {
 	Cell test = Cell('*');
-	//test.p = new ConwayCell('*');
+	
 	ASSERT_TRUE(test.isAlive());
 }
 TEST(TestCellAlive, ali2)
 {
 	Cell test = Cell('0');
-	//test.p = new FredkinCell('0');
+	
 	ASSERT_TRUE(test.isAlive());
 }
 TEST(TestCellAlive, ali3)
 {
 	Cell test = Cell('.');
-	//test.p = new ConwayCell('.');
+	
 	ASSERT_FALSE(test.isAlive());
 }
 TEST(TestCellStatus, stat1)
@@ -60,7 +60,6 @@ TEST(TestCellStatus, stat3)
 TEST(TestCellExecute, c_exe1)
 {
 	Cell test = Cell('*');
-	//test.p = new ConwayCell('*');
 	test.cell_Execute(0);
 	ASSERT_EQ(test.isAlive(),false);
 
@@ -68,14 +67,12 @@ TEST(TestCellExecute, c_exe1)
 TEST(TestCellExecute, c_exe2)
 {
 	Cell test = Cell('.');
-	//test.p = new ConwayCell('.');
 	test.cell_Execute(3);
 	ASSERT_EQ(test.isAlive(),true);
 }
 TEST(TestCellExecute, c_exe3)
 {
 	Cell test = Cell('-');
-	//test.p = new FredkinCell('-');
 	test.cell_Execute(1);
 	ASSERT_EQ(test.isAlive(),true);
 }
@@ -208,50 +205,49 @@ TEST(TestLifeConstructor, life3)
 TEST(TestLifeParse, parse1)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r("..\n..");
+	istringstream r("\n..\n..");
 	test.parseFile(r);
 	ASSERT_EQ(test.grid[0][0].isStatus(),'.');
 }
 TEST(TestLifeParse, parse2)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r("..\n.*");
+	istringstream r("\n..\n.*");
 	test.parseFile(r);
 	ASSERT_EQ(test.grid[1][1].isStatus(),'*');
 }
-
 TEST(TestLifeParse, parse3)
 {
-	Life<ConwayCell> test(2,2);
-	istringstream r("*.\n*.");
+	Life<Cell> test(2,2);
+	istringstream r("\n--\n--");
 	test.parseFile(r);
-	ASSERT_EQ(test.grid[1][1].isStatus(),'*');
+	ASSERT_EQ(test.grid[1][1].isStatus(),'-');
 }
 TEST(TestLifeNeighs, alive1)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r("..\n.*");
+	istringstream r("\n..\n.*");
 	test.parseFile(r);
-	ASSERT_EQ(test.alive_neighs(0,0),3);
+	ASSERT_EQ(test.alive_neighs(0,0),1);
 }
 TEST(TestLifeNeighs, alive2)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r("..\n**");
+	istringstream r("\n..\n**");
 	test.parseFile(r);
-	ASSERT_EQ(test.alive_neighs(0,0),3);
+	ASSERT_EQ(test.alive_neighs(0,0),2);
 }
 TEST(TestLifeNeighs, alive3)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r(".*\n**");
+	istringstream r("\n.*\n**");
 	test.parseFile(r);
 	ASSERT_EQ(test.alive_neighs(0,0),3);
 }
-/*TEST(TestLifeExecute, l_exe1)
+TEST(TestLifeExecute, l_exe1)
 {
 	Life<ConwayCell> test(2,2);
-	istringstream r(".*\n**");
+	istringstream r("\n.*\n**");
 	test.parseFile(r);
 	test.execute();
 	ASSERT_EQ(test.grid[0][0].isStatus(),'*');
@@ -259,9 +255,129 @@ TEST(TestLifeNeighs, alive3)
 TEST(TestLifeExecute, l_exe2)
 {
 	Life<FredkinCell> test(2,2);
-	istringstream r("--\n--");
+	istringstream r("\n--\n--");
 	test.parseFile(r);
 	test.execute();
-	ASSERT_EQ(test.grid[0][0].isStatus(),'0');
+	ASSERT_EQ(test.grid[0][0].isStatus(),'-');
+}
+TEST(TestLifeExecute, l_exe3)
+{
+	Life<Cell> test(2,2);
+	istringstream r("\n--\n--");
+	test.parseFile(r);
+	test.execute();
+	ASSERT_EQ(test.grid[0][0].isStatus(),'-');
+}
+TEST(TestLifeRun, run1)
+{
+	Life<ConwayCell> test(3,3);
+	istringstream r("\n...\n.*.\n..*");
+	test.parseFile(r);
+	test.run(2,1);
+	ASSERT_EQ(test.getPopulation(),0);
+}
+TEST(TestLifeRun, run2)
+{
+	Life<FredkinCell> test(3,3);
+	istringstream r("\n---\n-0-\n-0-");
+	test.parseFile(r);
+	test.run(2,2);
+	ASSERT_EQ(test.getPopulation(),2);
+}
+TEST(TestLifeRun, run3)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n--*\n--0\n--*");
+	test.parseFile(r);
+	test.run(2,1);
+	ASSERT_EQ(test.getPopulation(),6);
+}
+TEST(TestCellClone, cloneFred1)
+{
+	FredkinCell* p = new  FredkinCell();
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneFred2)
+{
+	FredkinCell* p = new  FredkinCell('-');
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneFred3)
+{
+	FredkinCell* p = new  FredkinCell('0');
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneFred4)
+{
+	FredkinCell* p = new  FredkinCell('+');
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneCon1)
+{
+	ConwayCell* p = new  ConwayCell();
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneCon2)
+{
+	ConwayCell* p = new  ConwayCell('*');
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellClone, cloneCon3)
+{
+	ConwayCell* p = new  ConwayCell('.');
+	AbstractCell* q = p->clone();
+	ASSERT_EQ(p->isStatus(),q->isStatus());
+	ASSERT_NE(p,q);	
+}
+TEST(TestCellAssignment, CellAssignment1)
+{
+	Cell p = Cell(new  ConwayCell('.'));
+	ASSERT_EQ(p.isStatus(),'.');
+	Cell q = Cell(new  ConwayCell('*'));
+	p = q;
+	ASSERT_EQ(p.isStatus(),'*');
+	
+}
+TEST(TestCellAssignment, CellAssignment2)
+{
+	Cell p = Cell(new  FredkinCell('-'));
+	ASSERT_EQ(p.isStatus(),'-');
+	Cell q = Cell(new  FredkinCell('0'));
+	p = q;
+	ASSERT_EQ(p.isStatus(),'0');
+	
+}
+TEST(TestCellAssignment, CellAssignment3)
+{
+	Cell p = Cell(new  FredkinCell('-'));
+	ASSERT_EQ(p.isStatus(),'-');
+	Cell q = Cell(new  ConwayCell('*'));
+	p = q;
+	ASSERT_EQ(p.isStatus(),'*');
+}
+/*TEST(TestAliveNeigh, AliveCon)
+{
+	
+	ASSERT_EQ(p.isStatus(),'*');
+}
+TEST(TestCellAssignment, AliveFred)
+{
+	
+}
+TEST(TestCellAssignment, AliveCell)
+{
+	
 }
 */

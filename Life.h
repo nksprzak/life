@@ -49,6 +49,7 @@ public:
 	ConwayCell() 
 	{
 		status = '*';
+		alive = false;
 	};
 
 	ConwayCell(char b) 
@@ -77,7 +78,11 @@ class FredkinCell: public AbstractCell
 private:
 	char age;
 public:
-	FredkinCell() {};
+	FredkinCell() {
+		age = 48;
+		alive = true;
+		status = '-';
+	};
 	FredkinCell(char s) {
 		//cout<<"create fred"<<endl;
 		status = s;
@@ -138,6 +143,7 @@ public:
 
 	Cell& operator =(const Cell& c)
 	{
+		delete p;
 		p = c.p->clone();
 		return *this;
 	}
@@ -189,21 +195,16 @@ public:
 		getline(r,s);
 		while(getline(r,s) && !s.empty())
 		{
-			
 			char buf;
-			
 			stringstream in(s);
 			while(in >> buf)
 			{
-				{
-					T f(buf);
-					grid[rs][cs] = f;
-					cs++;	
-				}
-				
-
+				T f(buf);
+				//cout << buf;
+				grid[rs][cs] = f;
+				cs++;	
 			}
-			
+			//cout << endl;
 			cs = 0;
 			rs++;
 		}
@@ -279,6 +280,7 @@ public:
 	void execute()
 	{
 		vector<vector<int> > cells_neighs(_x,vector<int>(_y));
+		//int holder;
 		//Creates a grid of # of live neighbors for each cell
 		for(int i = 0; i < _x; i++)
 		{
@@ -286,6 +288,7 @@ public:
 			for(int j =0 ; j < _y; j++)
 			{
 				cells_neighs[i][j] = alive_neighs(i,j);
+				//holder = cells_neighs[i][j];
 			}
 		}
 		/*Tells each cell to execute based on its number of live neighbors.

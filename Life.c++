@@ -5,7 +5,6 @@ AbstractCell::~AbstractCell(){}
 Cell::Cell(char b)
 {
 	
-	//status = b;
 	//The status of the generic cell is used to determine
 	//The type of cell to be created
 	if(b=='*'||b=='.') p = new ConwayCell(b);
