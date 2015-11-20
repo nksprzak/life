@@ -1,0 +1,185 @@
+commit 0e76b7d804ffb1d4c6846dd55316fb1ccf4d940f
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 21:57:22 2015 -0600
+
+    final final
+
+commit 3bfc1ccd441c52ec8dbef4af927f3b33415e2eef
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 21:51:12 2015 -0600
+
+    final commit
+
+commit 112426440436c8e2fdc637dbdc1f799cc3440fe8
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 21:11:44 2015 -0600
+
+    travis
+
+commit 6c05cae44aa4b31f9a6e1cfb719748014d1d2a30
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 21:07:17 2015 -0600
+
+    travis fix
+
+commit bd00f7057e00300b3cdb352bb143d0e341a2f173
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 21:02:13 2015 -0600
+
+    made public test repo tests, fixed make file for travies, updated git ignore
+
+commit 34f2ba9840c57ec90409f77511f0b16072e84773
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 20:24:53 2015 -0600
+
+    add more stuff
+
+commit c44364dffa8cb5947b60d0f08b0211d606f5dd23
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 20:24:25 2015 -0600
+
+    fix travis, fix makefile
+
+commit c072309baabd0f774dc04c65681d0126650922da
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 19:53:09 2015 -0600
+
+    fixed mem leak added unit tests
+
+commit 2b78a237e2263051a23d1eeb671b25477ccbed15
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 19 18:07:35 2015 -0600
+
+    fixing everthing
+
+commit c1ee7da7570a9fd1f6f943ccfa0738944d9532e9
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Thu Nov 19 15:56:52 2015 -0600
+
+    added clone and copy constructor
+
+commit 2e92ec3b59bba276c60ba3ae3c2f87ed1e3ab10e
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Thu Nov 19 15:01:46 2015 -0600
+
+    attempting to fix memleak
+
+commit 5b61614ee57689849f0bb7d91e5c7dd993fdfed6
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Wed Nov 18 23:14:03 2015 -0600
+
+    added comments, need to fix memory leak, closes #15
+
+commit 43df19b05508846ea976c851c86b4f3f36a25e29
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Nov 18 12:35:59 2015 -0600
+
+    tests
+
+commit 64885042d8b77aac0c10d0ed60f3357a91b3d7da
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Nov 18 12:17:00 2015 -0600
+
+    more tests
+
+commit f7e24c128d016eb77b6b4745be5a17c0c9a57069
+Author: nick <nksprzak@gmail.com>
+Date:   Wed Nov 18 01:02:09 2015 -0600
+
+    addin tests
+
+commit 2f3f8f10829ab69ed04ee3ec8eb9b799c3a69112
+Author: nick <nksprzak@gmail.com>
+Date:   Wed Nov 18 00:39:25 2015 -0600
+
+    tests
+
+commit 57ea16d2b78b95315c91a6c0f9307148220bb85b
+Author: nick <nksprzak@gmail.com>
+Date:   Wed Nov 18 00:21:14 2015 -0600
+
+    tests
+
+commit 84b2a181dbef09c8d75fc0e9a7a4620c020e3369
+Author: nick <nksprzak@gmail.com>
+Date:   Wed Nov 18 00:08:40 2015 -0600
+
+    more tests
+
+commit 3abd1c322755e79ac914e6859d9f47b638bb8ab1
+Author: nick <nksprzak@gmail.com>
+Date:   Wed Nov 18 00:02:06 2015 -0600
+
+    adding acceptance tests
+
+commit 46634f43f77393ef20d65a3991e908bbdca2e339
+Author: nick <nksprzak@gmail.com>
+Date:   Tue Nov 17 22:53:57 2015 -0600
+
+    cleanup and output file
+
+commit 13c4f561479b74dda79408febab8c270555dd14a
+Author: nick <nksprzak@gmail.com>
+Date:   Tue Nov 17 21:54:41 2015 -0600
+
+    cleaning up comments
+
+commit c58e1ae5e23f060a46b9b6444e6478e28336a4d7
+Author: nick <nksprzak@gmail.com>
+Date:   Tue Nov 17 21:50:39 2015 -0600
+
+    got everything working
+
+commit 7244fcb510cf6208bde6c48d4226fe385807f160
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Tue Nov 17 19:00:48 2015 -0600
+
+    got Conway and Fredkin working,now Cell
+
+commit 4aba433aa148e8184cac72c82b8a55f8d91176a4
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Tue Nov 17 17:15:15 2015 -0600
+
+    adding alive_neighs method
+
+commit 3336538f1859afec97fd77eeb3c31563b96a0944
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 12 17:41:28 2015 -0600
+
+    fixing the parses
+
+commit 7959e5bdc344ecb17299756f67fc455d54495f87
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 12 13:26:49 2015 -0600
+
+    changing input
+
+commit ba6edc0bcb66833868c3fa287d2e4b1378f3457c
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Nov 12 12:46:02 2015 -0600
+
+    adding in parsing funs
+
+commit 589eff355c2482fe919b224b6d5aa64ca225365f
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Nov 11 16:34:22 2015 -0600
+
+    adding more shiz
+
+commit f9d6eddf7cbf83948af0f039d7d73856b5718c03
+Author: nick <nick@nick-U46E.(none)>
+Date:   Mon Nov 9 23:56:43 2015 -0600
+
+    updating life.h
+
+commit 15459635efd71df8bc8850f478d90ebdc32f84d1
+Author: nick <nick@nick-U46E.(none)>
+Date:   Mon Nov 9 18:05:01 2015 -0600
+
+    adding more files
+
+commit 5a475a91956738be72c2f17f889f953808762733
+Author: nick <nick@nick-U46E.(none)>
+Date:   Mon Nov 9 17:43:47 2015 -0600
+
+    inital commit
