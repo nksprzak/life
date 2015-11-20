@@ -1,7 +1,5 @@
 FILES :=                              \
     .travis.yml                       \
-    life-tests/nrk423-TestLife.c++ \
-    life-tests/nrk423-TestLife.out \
     Life.h                        \
     html                              \
     TestLife.c++                    \
