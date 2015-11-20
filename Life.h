@@ -34,8 +34,7 @@ protected:
 	FRIEND_TEST(TestFredkinExecute, f_exe3);
 
 public:
-	virtual bool isAlive() {assert(false);
-		return alive;};
+	virtual bool isAlive() {return alive;};
 	virtual char isStatus(){return status;}
 	virtual void cell_Execute(int neighs){};
 	virtual ~AbstractCell(); 
@@ -59,6 +58,8 @@ public:
 		if(b == '*') alive = true;
 		else alive = false;
 	};
+
+	AbstractCell* clone();
 	virtual ~ConwayCell() {};
 
 	void cell_Execute(int n);
@@ -85,6 +86,7 @@ public:
 		else alive = true;
 	};
 	virtual ~FredkinCell() {};
+	AbstractCell* clone();
 	bool isAlive();
 	char isStatus();
 	void cell_Execute(int n);
@@ -101,7 +103,7 @@ private:
 	AbstractCell* p;
 	//Since cell doesnt inherit from Abstract cell status
 	//needs to be added in order to properly parse the file
-	char status;
+	//char status;
 
 	FRIEND_TEST(TestCellConstructor, con1);
 	FRIEND_TEST(TestCellConstructor, con2);
@@ -114,14 +116,16 @@ private:
 	FRIEND_TEST(TestCellExecute, c_exe3);
 
 public:
-	Cell(){};
+	Cell(){
+		p = new FredkinCell('-');
+	};
 	Cell(AbstractCell* ac)
 	{
 		p = ac;
 	}
-	Cell(Cell& c)
+	Cell(const Cell& c) 
 	{
-		clone(c);
+		p = c.p->clone();
 	}
 	Cell(char b);
 	~Cell(){delete p;}
@@ -130,9 +134,16 @@ public:
 	//the status of the cell is used in computing live neighbors
 	char isStatus() {return p->isStatus();};
 	void cell_Execute(int n);
+
+
+	Cell& operator =(const Cell& c)
+	{
+		p = c.p->clone();
+		return *this;
+	}
 	friend std::ostream& operator << (std::ostream& os, const Cell& sp)
 	{
-		os << sp.status;
+		os << sp.p->isStatus();
 		return os;
 	}
 
@@ -168,54 +179,31 @@ private:
 public:
 	//Reads the input file and generates the experiments to be performed
 	//Requires certain syntax on the input file
-	~Life(){};
+	//~Life(){};
 
 	void parseFile(istream& r)
 	{
 		string s;
-		string::size_type sz;
-		getline(r,s);
-		cell_type = s;
-		getline(r,s);
-		getline(r,s);
-		getline(r,s);
-		iterations = stoi(s,&sz);
-		getline(r,s);
-		num_of_prints = stoi(s,&sz);	
-		int rs = 0;
+		int rs =0;
 		int cs = 0;
+		getline(r,s);
 		while(getline(r,s) && !s.empty())
 		{
+			
 			char buf;
 			
 			stringstream in(s);
 			while(in >> buf)
 			{
-				if(cell_type.compare("Cell")==0)
-				{
-					if(buf == '.' || buf == '*')
-					{
-						T f(new ConwayCell(buf));
-						grid[rs][cs] = f;
-						cs++;
-					}
-					else
-					{
-						T f(new FredkinCell(buf));
-						grid[rs][cs] = f;
-						cs++;
-					}
-
-
-				}
-				else
 				{
 					T f(buf);
 					grid[rs][cs] = f;
-					cs++;
+					cs++;	
 				}
+				
 
 			}
+			
 			cs = 0;
 			rs++;
 		}
@@ -311,15 +299,15 @@ public:
 		}
 	}
 	//executes the required amount of iterations per experiment
-	void run()
+	void run(int iter, int nums)
 	{
 		cout << "Generation = 0, Population = " << getPopulation() <<endl;
 		printGrid();
 		cout << endl;
-		for(int i = 1; i <= iterations; i++)
+		for(int i = 1; i <= iter; i++)
 		{
 			execute();
-			if(i%num_of_prints == 0)
+			if(i%nums == 0)
 			{
 				cout << "Generation = " << i << ", " << "Population = " << getPopulation() << endl;
 				printGrid();
@@ -349,10 +337,7 @@ public:
 		for(int i = 0; i < x; i++)
 		{
 			vector<T> a;
-			for(int j = 0; j < y; j++)
-			{
-				a = vector<T>(y);
-			}
+			a = vector<T>(y);
 			grid.push_back(a);
 		}
 	};

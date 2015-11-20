@@ -5,12 +5,11 @@ AbstractCell::~AbstractCell(){}
 Cell::Cell(char b)
 {
 	
-	status = b;
+	//status = b;
 	//The status of the generic cell is used to determine
 	//The type of cell to be created
 	if(b=='*'||b=='.') p = new ConwayCell(b);
 	else p = new FredkinCell(b);
-	cout<<"creating cell p = "<<p<<endl;
 }
 
 void Cell::cell_Execute(int n)
@@ -18,16 +17,13 @@ void Cell::cell_Execute(int n)
 	//Requires a cell to call its own execution since fredkin and Conway cells 
 	//exhibit special behaviors
 	p->cell_Execute(n);
-	status = p->isStatus();
-	if(status =='2')
+	//status = p->isStatus();
+	if(p->isStatus() =='2')
 	{
 		//In the case of a Cell if a fredkin cell would turn to age 2, it becomes a conway cell
 		//Needs memory management here
-		cout<<"DELETING P "<<p<<endl;
 		delete p;
-		status = '*';
-		p = new ConwayCell(status);
-		cout<<"NEW P "<<p<<endl;		
+		p = new ConwayCell('*');	
 	} 
 }
 

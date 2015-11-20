@@ -12,7 +12,7 @@ CXXFLAGS   := -pedantic -std=c++11 -Wall
 LDFLAGS    := -lgtest -lgtest_main -pthread 
 GCOV       := gcov-4.8
 GCOVFLAGS  := -fprofile-arcs -ftest-coverage
-VALGRIND   := valgrind
+VALGRIND   := valgrind 
 
 check:
 	@not_found=0;                                 \
@@ -39,6 +39,7 @@ clean:
 	rm -f *.gcov
 	rm -f TestLife
 	rm -f TestLife.tmp
+	rm -f RunLife
 
 config:
 	git config -l
