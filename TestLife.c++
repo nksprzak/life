@@ -432,3 +432,17 @@ TEST(TestLifePopulation, Cell)
 	ASSERT_EQ(test.getPopulation(),5);
 
 }
+TEST(TestIterator, begin)
+{
+	Life<Cell> l(3,3);
+	ASSERT_EQ(l.begin(), l.end());
+
+}
+TEST(TestIterator, at)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-*0\n.00\n-.0");
+	test.parseFile(r);
+	ASSERT_EQ(test.at(0).isStatus(),'-');
+
+}

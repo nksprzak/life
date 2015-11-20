@@ -1,0 +1,263 @@
+==16453== Memcheck, a memory error detector
+==16453== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==16453== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==16453== Command: ./TestLife
+==16453== 
+Running main() from gtest_main.cc
+[==========] Running 64 tests from 21 test cases.
+[----------] Global test environment set-up.
+[----------] 3 tests from TestCellConstructor
+[ RUN      ] TestCellConstructor.con1
+[       OK ] TestCellConstructor.con1 (8 ms)
+[ RUN      ] TestCellConstructor.con2
+[       OK ] TestCellConstructor.con2 (2 ms)
+[ RUN      ] TestCellConstructor.con3
+[       OK ] TestCellConstructor.con3 (1 ms)
+[----------] 3 tests from TestCellConstructor (18 ms total)
+
+[----------] 3 tests from TestCellAlive
+[ RUN      ] TestCellAlive.ali1
+[       OK ] TestCellAlive.ali1 (3 ms)
+[ RUN      ] TestCellAlive.ali2
+[       OK ] TestCellAlive.ali2 (2 ms)
+[ RUN      ] TestCellAlive.ali3
+[       OK ] TestCellAlive.ali3 (2 ms)
+[----------] 3 tests from TestCellAlive (7 ms total)
+
+[----------] 3 tests from TestCellStatus
+[ RUN      ] TestCellStatus.stat1
+[       OK ] TestCellStatus.stat1 (2 ms)
+[ RUN      ] TestCellStatus.stat2
+[       OK ] TestCellStatus.stat2 (2 ms)
+[ RUN      ] TestCellStatus.stat3
+[       OK ] TestCellStatus.stat3 (2 ms)
+[----------] 3 tests from TestCellStatus (6 ms total)
+
+[----------] 3 tests from TestCellExecute
+[ RUN      ] TestCellExecute.c_exe1
+[       OK ] TestCellExecute.c_exe1 (3 ms)
+[ RUN      ] TestCellExecute.c_exe2
+[       OK ] TestCellExecute.c_exe2 (2 ms)
+[ RUN      ] TestCellExecute.c_exe3
+[       OK ] TestCellExecute.c_exe3 (3 ms)
+[----------] 3 tests from TestCellExecute (8 ms total)
+
+[----------] 3 tests from TestCellPrint
+[ RUN      ] TestCellPrint.c_print1
+[       OK ] TestCellPrint.c_print1 (5 ms)
+[ RUN      ] TestCellPrint.c_print2
+[       OK ] TestCellPrint.c_print2 (2 ms)
+[ RUN      ] TestCellPrint.c_print3
+[       OK ] TestCellPrint.c_print3 (2 ms)
+[----------] 3 tests from TestCellPrint (9 ms total)
+
+[----------] 2 tests from TestConwayContructor
+[ RUN      ] TestConwayContructor.conway1
+[       OK ] TestConwayContructor.conway1 (2 ms)
+[ RUN      ] TestConwayContructor.conway2
+[       OK ] TestConwayContructor.conway2 (2 ms)
+[----------] 2 tests from TestConwayContructor (4 ms total)
+
+[----------] 3 tests from TestConwayExecute
+[ RUN      ] TestConwayExecute.c_exe1
+[       OK ] TestConwayExecute.c_exe1 (2 ms)
+[ RUN      ] TestConwayExecute.c_exe2
+[       OK ] TestConwayExecute.c_exe2 (2 ms)
+[ RUN      ] TestConwayExecute.c_exe3
+[       OK ] TestConwayExecute.c_exe3 (2 ms)
+[----------] 3 tests from TestConwayExecute (6 ms total)
+
+[----------] 2 tests from TestConwayPrint
+[ RUN      ] TestConwayPrint.c_print1
+[       OK ] TestConwayPrint.c_print1 (2 ms)
+[ RUN      ] TestConwayPrint.c_print2
+[       OK ] TestConwayPrint.c_print2 (2 ms)
+[----------] 2 tests from TestConwayPrint (4 ms total)
+
+[----------] 3 tests from TestFredkinConstructor
+[ RUN      ] TestFredkinConstructor.fred_con1
+[       OK ] TestFredkinConstructor.fred_con1 (2 ms)
+[ RUN      ] TestFredkinConstructor.fred_con2
+[       OK ] TestFredkinConstructor.fred_con2 (2 ms)
+[ RUN      ] TestFredkinConstructor.fred_con3
+[       OK ] TestFredkinConstructor.fred_con3 (1 ms)
+[----------] 3 tests from TestFredkinConstructor (5 ms total)
+
+[----------] 3 tests from TestFredkinExecute
+[ RUN      ] TestFredkinExecute.f_exe1
+[       OK ] TestFredkinExecute.f_exe1 (2 ms)
+[ RUN      ] TestFredkinExecute.f_exe2
+[       OK ] TestFredkinExecute.f_exe2 (2 ms)
+[ RUN      ] TestFredkinExecute.f_exe3
+[       OK ] TestFredkinExecute.f_exe3 (2 ms)
+[----------] 3 tests from TestFredkinExecute (6 ms total)
+
+[----------] 2 tests from TestFredkinPrint
+[ RUN      ] TestFredkinPrint.f_print1
+[       OK ] TestFredkinPrint.f_print1 (2 ms)
+[ RUN      ] TestFredkinPrint.f_print2
+[       OK ] TestFredkinPrint.f_print2 (2 ms)
+[----------] 2 tests from TestFredkinPrint (4 ms total)
+
+[----------] 3 tests from TestLifeConstructor
+[ RUN      ] TestLifeConstructor.life1
+[       OK ] TestLifeConstructor.life1 (31 ms)
+[ RUN      ] TestLifeConstructor.life2
+[       OK ] TestLifeConstructor.life2 (28 ms)
+[ RUN      ] TestLifeConstructor.life3
+[       OK ] TestLifeConstructor.life3 (29 ms)
+[----------] 3 tests from TestLifeConstructor (88 ms total)
+
+[----------] 3 tests from TestLifeParse
+[ RUN      ] TestLifeParse.parse1
+[       OK ] TestLifeParse.parse1 (22 ms)
+[ RUN      ] TestLifeParse.parse2
+[       OK ] TestLifeParse.parse2 (3 ms)
+[ RUN      ] TestLifeParse.parse3
+[       OK ] TestLifeParse.parse3 (6 ms)
+[----------] 3 tests from TestLifeParse (31 ms total)
+
+[----------] 3 tests from TestLifeNeighs
+[ RUN      ] TestLifeNeighs.alive1
+[       OK ] TestLifeNeighs.alive1 (5 ms)
+[ RUN      ] TestLifeNeighs.alive2
+[       OK ] TestLifeNeighs.alive2 (4 ms)
+[ RUN      ] TestLifeNeighs.alive3
+[       OK ] TestLifeNeighs.alive3 (2 ms)
+[----------] 3 tests from TestLifeNeighs (12 ms total)
+
+[----------] 3 tests from TestLifeExecute
+[ RUN      ] TestLifeExecute.l_exe1
+[       OK ] TestLifeExecute.l_exe1 (27 ms)
+[ RUN      ] TestLifeExecute.l_exe2
+[       OK ] TestLifeExecute.l_exe2 (17 ms)
+[ RUN      ] TestLifeExecute.l_exe3
+[       OK ] TestLifeExecute.l_exe3 (14 ms)
+[----------] 3 tests from TestLifeExecute (58 ms total)
+
+[----------] 3 tests from TestLifeRun
+[ RUN      ] TestLifeRun.run1
+Generation = 0, Population = 2
+...
+.*.
+..*
+
+Generation = 1, Population = 0
+...
+...
+...
+
+Generation = 2, Population = 0
+...
+...
+...
+
+[       OK ] TestLifeRun.run1 (10 ms)
+[ RUN      ] TestLifeRun.run2
+Generation = 0, Population = 2
+---
+-0-
+-0-
+
+Generation = 2, Population = 2
+-1-
+---
+-2-
+
+[       OK ] TestLifeRun.run2 (7 ms)
+[ RUN      ] TestLifeRun.run3
+Generation = 0, Population = 3
+--*
+--0
+--*
+
+Generation = 1, Population = 3
+-0.
+-0-
+-0.
+
+Generation = 2, Population = 6
+01.
+0-0
+01.
+
+[       OK ] TestLifeRun.run3 (9 ms)
+[----------] 3 tests from TestLifeRun (26 ms total)
+
+[----------] 7 tests from TestCellClone
+[ RUN      ] TestCellClone.cloneFred1
+[       OK ] TestCellClone.cloneFred1 (3 ms)
+[ RUN      ] TestCellClone.cloneFred2
+[       OK ] TestCellClone.cloneFred2 (3 ms)
+[ RUN      ] TestCellClone.cloneFred3
+[       OK ] TestCellClone.cloneFred3 (3 ms)
+[ RUN      ] TestCellClone.cloneFred4
+[       OK ] TestCellClone.cloneFred4 (2 ms)
+[ RUN      ] TestCellClone.cloneCon1
+[       OK ] TestCellClone.cloneCon1 (3 ms)
+[ RUN      ] TestCellClone.cloneCon2
+[       OK ] TestCellClone.cloneCon2 (3 ms)
+[ RUN      ] TestCellClone.cloneCon3
+[       OK ] TestCellClone.cloneCon3 (2 ms)
+[----------] 7 tests from TestCellClone (19 ms total)
+
+[----------] 5 tests from TestCellAssignment
+[ RUN      ] TestCellAssignment.CellAssignment1
+[       OK ] TestCellAssignment.CellAssignment1 (4 ms)
+[ RUN      ] TestCellAssignment.CellAssignment2
+[       OK ] TestCellAssignment.CellAssignment2 (3 ms)
+[ RUN      ] TestCellAssignment.CellAssignment3
+[       OK ] TestCellAssignment.CellAssignment3 (4 ms)
+[ RUN      ] TestCellAssignment.AliveFred
+[       OK ] TestCellAssignment.AliveFred (3 ms)
+[ RUN      ] TestCellAssignment.AliveCell
+[       OK ] TestCellAssignment.AliveCell (4 ms)
+[----------] 5 tests from TestCellAssignment (18 ms total)
+
+[----------] 1 test from TestAliveNeigh
+[ RUN      ] TestAliveNeigh.AliveCon
+[       OK ] TestAliveNeigh.AliveCon (3 ms)
+[----------] 1 test from TestAliveNeigh (3 ms total)
+
+[----------] 3 tests from TestLifePopulation
+[ RUN      ] TestLifePopulation.ConCell
+[       OK ] TestLifePopulation.ConCell (3 ms)
+[ RUN      ] TestLifePopulation.FredCell
+[       OK ] TestLifePopulation.FredCell (3 ms)
+[ RUN      ] TestLifePopulation.Cell
+[       OK ] TestLifePopulation.Cell (3 ms)
+[----------] 3 tests from TestLifePopulation (9 ms total)
+
+[----------] 3 tests from TestIterator
+[ RUN      ] TestIterator.begin
+[       OK ] TestIterator.begin (4 ms)
+[ RUN      ] TestIterator.end
+[       OK ] TestIterator.end (3 ms)
+[ RUN      ] TestIterator.at
+[       OK ] TestIterator.at (3 ms)
+[----------] 3 tests from TestIterator (10 ms total)
+
+[----------] Global test environment tear-down
+[==========] 64 tests from 21 test cases ran. (378 ms total)
+[  PASSED  ] 64 tests.
+==16453== 
+==16453== HEAP SUMMARY:
+==16453==     in use at exit: 0 bytes in 0 blocks
+==16453==   total heap usage: 2,922 allocs, 2,922 frees, 242,087 bytes allocated
+==16453== 
+==16453== All heap blocks were freed -- no leaks are possible
+==16453== 
+==16453== For counts of detected and suppressed errors, rerun with: -v
+==16453== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+File 'Life.c++'
+Lines executed:93.48% of 46
+Branches executed:95.00% of 40
+Taken at least once:77.50% of 40
+Calls executed:64.71% of 17
+Creating 'Life.c++.gcov'
+File 'TestLife.c++'
+Lines executed:100.00% of 300
+Branches executed:66.78% of 1806
+Taken at least once:33.39% of 1806
+Calls executed:56.52% of 2063
+Creating 'TestLife.c++.gcov'

@@ -157,14 +157,13 @@ public:
 
 };
 
-
 template <typename T>
 class Life
 {
 
 private:
 	vector<vector<T> > grid;
-	vector<T> cells;
+	vector<Cell> cells;
 	int _x;
 	int _y;
 	string cell_type;
@@ -186,6 +185,25 @@ public:
 	
 /*Reads the input file and generates the generation 0 graph*/
 
+	//typename typedef std::vector< T>::iterator iterator;
+
+
+	std::vector<Cell>::iterator begin()
+	{
+		return cells.begin();
+	}
+
+	std::vector<Cell>::iterator end()
+	{
+		return cells.end();
+	}
+
+	Cell& at(int index)
+	{
+		return cells[index];
+	}
+
+	//Cell& at(int index);
 
 	void parseFile(istream& r)
 	{
@@ -200,11 +218,11 @@ public:
 			while(in >> buf)
 			{
 				T f(buf);
-				//cout << buf;
+				Cell h(buf);
 				grid[rs][cs] = f;
+				cells.push_back(h);
 				cs++;	
 			}
-			//cout << endl;
 			cs = 0;
 			rs++;
 		}
@@ -298,6 +316,7 @@ public:
 			for(int j =0 ; j < _y; j++)
 			{
 				grid[i][j].cell_Execute(cells_neighs[i][j]);
+
 			}
 		}
 	}
