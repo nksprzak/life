@@ -1,3 +1,15 @@
+commit e00bb1d63fe6a8714a158df580828b0a08335a4b
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Fri Nov 20 13:59:44 2015 -0600
+
+    add some iterator tests
+
+commit f6309b5acb7ff99ab1e1ee8005e19ff31c8807b7
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Fri Nov 20 13:28:54 2015 -0600
+
+    add life log and fix uml name
+
 commit 0e76b7d804ffb1d4c6846dd55316fb1ccf4d940f
 Author: nksprzak <nksprzak@gmail.com>
 Date:   Thu Nov 19 21:57:22 2015 -0600
