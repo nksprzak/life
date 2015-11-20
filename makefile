@@ -3,7 +3,8 @@ FILES :=                              \
     Life.h                        \
     html                              \
     TestLife.c++                    \
-    TestLife.out
+    TestLife.out                    \
+    Life.c++
 
 CXX        := g++-4.8
 CXXFLAGS   := -pedantic -std=c++11 -Wall
