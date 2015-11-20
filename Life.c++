@@ -10,11 +10,13 @@ Cell::Cell(char b)
 	if(b=='*'||b=='.') p = new ConwayCell(b);
 	else p = new FredkinCell(b);
 }
-
+/*Passes the job of execution
+ * dependent on the type of cell
+ * p is pointing to
+ */
 void Cell::cell_Execute(int n)
 {
-	//Requires a cell to call its own execution since fredkin and Conway cells 
-	//exhibit special behaviors
+	
 	p->cell_Execute(n);
 	//status = p->isStatus();
 	if(p->isStatus() =='2')
@@ -25,7 +27,9 @@ void Cell::cell_Execute(int n)
 		p = new ConwayCell('*');	
 	} 
 }
-
+/* sets the terms of when fredkin cells live
+ * or die 
+ */
 void FredkinCell::cell_Execute(int n)
 {
 	if(alive)
@@ -81,6 +85,9 @@ AbstractCell* FredkinCell::clone()
 {
 	return new FredkinCell(status);;
 }
+/* sets the terms of when conway cells live
+ * or die 
+ */
 void ConwayCell::cell_Execute(int n)
 {
 	if(alive)

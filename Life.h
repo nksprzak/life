@@ -183,9 +183,9 @@ private:
 	FRIEND_TEST(TestLifeExecute, l_exe3);
 
 public:
-	//Reads the input file and generates the experiments to be performed
-	//Requires certain syntax on the input file
-	//~Life(){};
+	
+/*Reads the input file and generates the generation 0 graph*/
+
 
 	void parseFile(istream& r)
 	{
@@ -264,7 +264,7 @@ public:
 		return count;
 	}
 
-	// Prints the game of life
+	/*Prints the current board state*/
 	void printGrid()
 	{
 		for(int i = 0; i < this->_x; ++i)
@@ -276,7 +276,7 @@ public:
 			cout << endl;
 		}
 	}
-	//Iterates one generation of the game of life
+	/*Moves the game of life 1 generation*/
 	void execute()
 	{
 		vector<vector<int> > cells_neighs(_x,vector<int>(_y));
@@ -301,7 +301,10 @@ public:
 			}
 		}
 	}
-	//executes the required amount of iterations per experiment
+	/*Executes the game of life experiment @param iter is total 
+	* generations required @param nums is how many generations 
+	* run before printing the board
+	*/
 	void run(int iter, int nums)
 	{
 		cout << "Generation = 0, Population = " << getPopulation() <<endl;
@@ -319,7 +322,9 @@ public:
 			population = 0;
 		}
 	}
-	//returns the number of live cells
+	/* returns the current number
+	* of live cells 
+	*/
 	int getPopulation()
 	{
 		population = 0;

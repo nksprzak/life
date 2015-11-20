@@ -292,19 +292,25 @@ TEST(TestLifeRun, run3)
 	test.run(2,1);
 	ASSERT_EQ(test.getPopulation(),6);
 }
+
 TEST(TestCellClone, cloneFred1)
 {
 	FredkinCell* p = new  FredkinCell();
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
+
 TEST(TestCellClone, cloneFred2)
 {
 	FredkinCell* p = new  FredkinCell('-');
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
 TEST(TestCellClone, cloneFred3)
 {
@@ -312,6 +318,8 @@ TEST(TestCellClone, cloneFred3)
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
 TEST(TestCellClone, cloneFred4)
 {
@@ -319,6 +327,8 @@ TEST(TestCellClone, cloneFred4)
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
 TEST(TestCellClone, cloneCon1)
 {
@@ -326,6 +336,8 @@ TEST(TestCellClone, cloneCon1)
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
 TEST(TestCellClone, cloneCon2)
 {
@@ -333,6 +345,8 @@ TEST(TestCellClone, cloneCon2)
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
 TEST(TestCellClone, cloneCon3)
 {
@@ -340,7 +354,11 @@ TEST(TestCellClone, cloneCon3)
 	AbstractCell* q = p->clone();
 	ASSERT_EQ(p->isStatus(),q->isStatus());
 	ASSERT_NE(p,q);	
+	delete p;
+	delete q;
 }
+
+
 TEST(TestCellAssignment, CellAssignment1)
 {
 	Cell p = Cell(new  ConwayCell('.'));
@@ -367,17 +385,50 @@ TEST(TestCellAssignment, CellAssignment3)
 	p = q;
 	ASSERT_EQ(p.isStatus(),'*');
 }
-/*TEST(TestAliveNeigh, AliveCon)
+
+TEST(TestAliveNeigh, AliveCon)
 {
-	
-	ASSERT_EQ(p.isStatus(),'*');
+	Life<ConwayCell> test(3,3);
+	istringstream r("\n..*\n.**\n..*");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,2),2);
 }
 TEST(TestCellAssignment, AliveFred)
 {
-	
+	Life<FredkinCell> test(3,3);
+	istringstream r("\n--0\n-00\n--0");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,2),1);
 }
 TEST(TestCellAssignment, AliveCell)
 {
+	Life<Cell> test(3,3);
+	istringstream r("\n-*0\n.00\n-.0");
+	test.parseFile(r);
+	ASSERT_EQ(test.alive_neighs(0,2),2);
+	ASSERT_EQ(test.alive_neighs(0,1),3);
+}
+TEST(TestLifePopulation, ConCell)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n.*.\n...\n..*");
+	test.parseFile(r);
+	ASSERT_EQ(test.getPopulation(),2);
 	
 }
-*/
+TEST(TestLifePopulation, FredCell)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n--0\n-00\n--0");
+	test.parseFile(r);
+	ASSERT_EQ(test.getPopulation(),4);
+
+}
+TEST(TestLifePopulation, Cell)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-*0\n.00\n-.0");
+	test.parseFile(r);
+	ASSERT_EQ(test.getPopulation(),5);
+
+}
