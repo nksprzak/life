@@ -57,7 +57,7 @@ status:
 	git remote -v
 	git status
 
-test: TestLife.tmp
+test: TestLife.out
 
 life-tests:
 	git clone https://github.com/cs371p-fall-2015/life-tests.git
@@ -74,7 +74,7 @@ Doxyfile:
 TestLife: Life.h TestLife.c++
 	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) TestLife.c++ Life.c++ -o TestLife $(LDFLAGS)
 
-TestLife.tmp: TestLife
+TestLife.out: TestLife
 	$(VALGRIND) ./TestLife                                       >  TestLife.out 2>&1
 	$(GCOV) -b Life.c++ | grep -A 5 "File 'Life.c++'" >> TestLife.out
 	$(GCOV) -b TestLife.c++ | grep -A 5 "File 'TestLife.c++'" >> TestLife.out
