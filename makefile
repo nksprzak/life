@@ -75,7 +75,7 @@ TestLife: Life.h TestLife.c++
 	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) TestLife.c++ Life.c++ -o TestLife $(LDFLAGS)
 
 TestLife.tmp: TestLife
-	$(VALGRIND) ./TestLife                                       >  TestLife.tmp 2>&1
-	$(GCOV) -b Life.c++ | grep -A 5 "File 'Life.c++'" >> TestLife.tmp
-	$(GCOV) -b TestLife.c++ | grep -A 5 "File 'TestLife.c++'" >> TestLife.tmp
-	cat TestLife.tmp
+	$(VALGRIND) ./TestLife                                       >  TestLife.out 2>&1
+	$(GCOV) -b Life.c++ | grep -A 5 "File 'Life.c++'" >> TestLife.out
+	$(GCOV) -b TestLife.c++ | grep -A 5 "File 'TestLife.c++'" >> TestLife.out
+	cat TestLife.out
