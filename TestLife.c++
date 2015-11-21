@@ -481,3 +481,17 @@ TEST(TestIterator, iterate2)
 	it++;
 	ASSERT_EQ(*it,test.cells[2]);
 }
+
+TEST(TestIterator, iterate3)
+{
+	Life<Cell> test(3,3);
+	istringstream r("\n-.-\n.00\n-.0");
+	test.parseFile(r);
+	test.run(2,2);
+	auto it = test.begin();
+	ASSERT_EQ(*it,test.cells[0]);
+	it++;
+	ASSERT_EQ(*it,test.cells[1]);
+	it++;
+	ASSERT_EQ(*it,test.cells[2]);
+}

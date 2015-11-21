@@ -1,3 +1,9 @@
+commit 55f1c807b477c32fe27876d514b242bf798f28d4
+Author: james Trevino <jtrevino@cs.utexas.edu>
+Date:   Fri Nov 20 14:08:53 2015 -0600
+
+    uppercase Life.log, remove TestLife
+
 commit a4d483932d4e8758b7e3ff97da06b64477f8531a
 Author: james Trevino <jtrevino@cs.utexas.edu>
 Date:   Fri Nov 20 14:00:13 2015 -0600

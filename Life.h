@@ -186,6 +186,7 @@ private:
 	FRIEND_TEST(TestLifeExecute, l_exe3);
 	FRIEND_TEST(TestIterator, iterate);
 	FRIEND_TEST(TestIterator, iterate2);
+	FRIEND_TEST(TestIterator, iterate3);
 
 public:
 	
@@ -312,16 +313,18 @@ public:
 			for(int j =0 ; j < _y; j++)
 			{
 				cells_neighs[i][j] = alive_neighs(i,j);
-				//holder = cells_neighs[i][j];
 			}
 		}
 		/*Tells each cell to execute based on its number of live neighbors.
 		cells handle their own execution*/
+		cells.clear();
 		for(int i = 0; i < _x; i++)
 		{
 			for(int j =0 ; j < _y; j++)
 			{
 				grid[i][j].cell_Execute(cells_neighs[i][j]);
+				Cell buf(grid[i][j].isStatus());
+				cells.push_back(buf);
 
 			}
 		}
